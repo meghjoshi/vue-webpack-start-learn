@@ -5,6 +5,9 @@ import home from '../components/home/home.vue'
 import category from '../components/category/category.vue'
 import author from '../components/author/author.vue'
 import tag from '../components/tag/tag.vue'
+import login from '../components/login/login.vue'
+import logout from '../components/logout/logout.vue'
+import register from '../components/register/register.vue'
 
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
@@ -32,6 +35,21 @@ export default new Router({
       path: '/tag/:tag',
       name: 'tag',
       component: tag
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: logout
     }
   ],
   mode: 'history'

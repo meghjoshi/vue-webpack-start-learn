@@ -1,0 +1,46 @@
+<div>
+  <headermenu></headermenu>
+  <v-content>
+    <v-container grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <v-container grid-list-xl>
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-form ref="form" lazy-validation>
+                  <v-text-field
+                    v-model="email"
+                    type="email"
+                    :error-messages="emailErrors"
+                    label="E-mail"
+                    required
+                    @input="$v.email.$touch()"
+                    @blur="$v.email.$touch()"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    :append-icon="show1 ? 'visibility_off' : 'visibility'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="Normal with hint text"
+                    hint="At least 8 characters"
+                    counter
+                    @click:append="show1 = !show1"
+                  ></v-text-field>
+                  <v-btn @click="submit">submit</v-btn>
+                  <v-btn @click="clear">clear</v-btn>
+                </v-form>
+                <span v-if="msg.length" strong><br>{{msg}}</span>
+                <br><br><br><br>
+                <h1>
+                  <router-link to="/register">Register</router-link>
+                </h1>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
+</div>
