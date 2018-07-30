@@ -1,0 +1,49 @@
+<div>
+  <headermenu></headermenu>
+  <v-content>
+    <v-container grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <v-container grid-list-xl>
+            <v-layout row wrap>
+              <v-flex xs12 sm12 v-for="item in this.info" :key="item._id">
+                <v-card flat class="text-sm-left">
+                  <v-card-media
+                    :src="cloudinaryImageUrl+item.wp_featuredImage"
+                    height="400px"
+                    style="background: cover"
+                  >
+                  </v-card-media>
+                  <v-card-title primary-title>
+                    <div>
+                      <router-link class="font-weight-bold headline" :to="'/'+item.slug"
+                                   style="font-weight: bolder;text-decoration: none">{{item.title}}
+                      </router-link>
+                      <br>
+                      <br>
+                      <span v-for="(cat, index) in item.categories" class="font-weight-bold" style="color: #3cccb7">
+                        <router-link class="font-weight-bold" :to="'/categories/'+cat.slug"
+                                     style="font-weight: bolder;text-decoration: none">{{cat.name}}</router-link>
+                        <span v-if="index+1 !== item.categories.length">, </span>
+                      </span>
+                      <span v-if="item._author.username">|
+                        <router-link class="font-weight-bold" :to="'/author/'+item._author.username"
+                                     style="font-weight: bolder;text-decoration: none">{{item._author.username}}</router-link>
+                      </span>
+                    </div>
+                  </v-card-title>
+                </v-card>
+              </v-flex>
+              <v-flex xs12>
+                <hr>
+                <v-btn class="text-xs-right" flat color="blue" v-if="loadMoreButton" v-on:click="loadmore(6)">More Info
+                  -->
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
+</div>
