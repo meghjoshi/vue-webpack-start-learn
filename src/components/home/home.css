@@ -1,0 +1,59 @@
+h1{
+  font-family: Sentinel;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 90px;
+}
+.text-title{
+  margin: 0 auto;
+}
+.text-title h2{
+  font-family: Sentinel;
+  font-size: 68px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 72px;
+}
+.elevated {
+  margin-bottom: 58px;
+  margin-left: auto;
+  margin-right: auto;
+}
+p.elevated {
+  font-family: Avenir Book;
+  font-size: 36px;
+  line-height: 48px;
+}
+.text-center {
+  text-align: center!important;
+}
+@media only screen and (max-width: 600px) {
+  .text-title h2{
+    font-size: 36px;
+    line-height: 42px;
+  }
+}
+.text-primary{
+  color: #3cccb7
+}
+.txtemail{
+  background-color: #fff;
+  font-size: 36px;
+  line-height: 40px;
+  padding: 28px 48px;
+}
+.btngetstarted .v-btn__content{
+  background-color: #3cccb7;
+  border: none;
+  color: #fff;
+  font-family: Avenir Black;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1em;
+  padding: .8em 2em;
+  text-align: center;
+}
+.rounded-class{
+  border-radius:15px;
+}

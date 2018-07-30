@@ -1,0 +1,21 @@
+<div>
+  <v-content>
+    <!--upper toolbar start-->
+    <!--upper toolbar ends-->
+    <!--main toolbar start-->
+    <v-toolbar light flat>
+      <v-toolbar-title style="cursor: pointer;text-transform: uppercase">
+        <router-link to="/">
+          <img height="30px" src="https://blavity.com/images/blavity-icon.png">
+          <span style="float: inherit"></span> blavity
+        </router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat v-for="item in menuItems" :to="item.link" :key="item.title">{{item.title}}</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <!--main toolbar ends-->
+  </v-content>
+  <!--end of the toolbar-->
+</div>
