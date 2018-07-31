@@ -1,5 +1,4 @@
 'use strict'
-
 import Vue from 'vue'
 import Router from 'vue-router'
 import headermenu from '../headermenu/headermenu.vue'

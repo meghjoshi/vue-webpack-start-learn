@@ -8,6 +8,7 @@ import tag from '../components/tag/tag.vue'
 import login from '../components/login/login.vue'
 import logout from '../components/logout/logout.vue'
 import register from '../components/register/register.vue'
+import singlearticle from '../components/singlearticle/singlearticle.vue'
 
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
@@ -50,6 +51,11 @@ export default new Router({
       path: '/logout',
       name: 'logout',
       component: logout
+    },
+    {
+      path: '/:slug',
+      name: 'SingleArticle',
+      component: singlearticle
     }
   ],
   mode: 'history'
