@@ -1,6 +1,10 @@
 'use strict'
+import Vue from 'vue'
 import headermenu from '../headermenu/headermenu.vue'
 import axios from 'axios'
+import VueLocalStorage from 'vue-localstorage'
+
+Vue.use(VueLocalStorage)
 
 export default {
   components: {
@@ -64,6 +68,26 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    newsletter () {
+      var headers = {
+        'token': Vue.localStorage.get('token')
+      }
+      if (this.$refs.form.validate()) {
+        axios.post(process.env.LiveAPI + 'subscribe',
+          {
+            user: {
+              'name': this.name,
+              'email': this.email
+            }
+          }, {headers: headers})
+          .then(res => {
+            this.clear()
+          })
+          .catch(e => {
+            this.clear()
+          })
+      }
     },
     clear () {
       this.$refs.form.reset()

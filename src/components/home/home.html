@@ -26,14 +26,9 @@
                       <img :src="topSingleArticle._author.gravatar">
                     </v-avatar>
                     <router-link class="font-weight-bold subheading black--text"
-                                 v-if="topSingleArticle._author.username"
                                  :to="'/author/'+topSingleArticle._author.username"
                                  style="text-decoration: none">{{topSingleArticle._author.username}}
                     </router-link>
-                    <p v-if="!topSingleArticle._author.username"
-                       class="font-weight-bold subheading black--text">
-                      {{topSingleArticle._author.username}}
-                    </p>
                   </v-chip>
                   <!--</v-flex>-->
                 </v-flex>
@@ -93,6 +88,7 @@
                 :src="cloudinaryImageUrl+videoArticle.wp_featuredImage"
                 height="300px">
               </v-card-media>
+
               <v-card-title primary-title>
                 <div>
                   <router-link class="font-weight-bold subheading black--text" :to="'/'+videoArticle.slug"
@@ -142,26 +138,21 @@
                              style="text-decoration: none">{{newsFeaturesArticles.title}}
                 </router-link>
                 <p class="body-2 text-sm-left font-weight-thin">{{newsFeaturesArticles.subTitle}}</p>
-                <router-link class="font-weight-bold subheading black--text"
-                             v-if="newsFeaturesArticles._author.username"
+                <router-link class="font-weight-black title black--text"
                              :to="'/author/'+newsFeaturesArticles._author.username"
                              style="text-decoration: none">{{newsFeaturesArticles._author.username}}
                 </router-link>
-                <p v-if="!newsFeaturesArticles._author.username"
-                   class="font-weight-bold subheading black--text">
-                  {{newsFeaturesArticles._author.username}}
-                </p>
               </v-flex>
             </v-layout>
-            <v-btn block text-xs-center v-on:click="articleLoadMore(10)">Load More Stories</v-btn>
+            <v-btn text-xs-center v-on:click="articleLoadMore(10)">Load More Stories</v-btn>
           </v-flex>
           <v-flex xs3 order-md3 order-xs3 color="red darken-4" text-xs-center>
             <v-card dark tile flat color="error">
               <v-form ref="form" v-model="valid" lazy-validation>
-                <v-card-text><p class="text-center subheading">Get the Blavity Daily newsletter with the best community
-                  finds and news.</p>
-                  <hr>
-                  <p class="text-center font-weight-bold title">Delivered To You</p>
+              <v-card-text><p class="text-center subheading">Get the Blavity Daily newsletter with the best community
+                finds and news.</p>
+                <hr>
+                <p class="text-center font-weight-bold title">Delivered To You</p>
                   <v-text-field
                     required
                     label="Name"
@@ -175,15 +166,9 @@
                     v-model="email"
                     value="email"
                   ></v-text-field>
-                </v-card-text>
-                <v-btn outline class="text-center" :disabled="!valid" @click="newsletter()">Sign Me Up</v-btn>
-              </v-form>
-            </v-card>
-            <br><br><br>
-            <v-card dark tile flat>
-              <v-card-text>
-                <p class="text-center subheading"> TRENDING RIGHT NOW</p>
               </v-card-text>
+              <v-btn outline class="text-center" :disabled="!valid" @click="newsletter()">Sign Me Up</v-btn>
+              </v-form>
             </v-card>
           </v-flex>
         </v-layout>
@@ -218,15 +203,10 @@
                               <v-avatar>
                                 <img :src="communityArticles._author.gravatar">
                               </v-avatar>
-                              <router-link class="font-weight-bold subheading black--text"
-                                           v-if="communityArticles._author.username"
+                              <router-link class="font-weight-black title black--text"
                                            :to="'/author/'+communityArticles._author.username"
                                            style="text-decoration: none">{{communityArticles._author.username}}
                               </router-link>
-                              <p v-if="!communityArticles._author.username"
-                                 class="font-weight-bold subheading black--text">
-                                {{communityArticles._author.username}}
-                              </p>
                             </v-chip>
                           </v-flex>
                         </v-flex>

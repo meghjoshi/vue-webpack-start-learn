@@ -10,7 +10,6 @@ export default {
       info: {},
       totalcount: 0,
       loadCount: 6,
-      loadMoreButton: 1,
       cloudinaryImageUrl: process.env.cloudinaryImageUrl
     }
   },
@@ -18,11 +17,7 @@ export default {
     axios
       .get(process.env.LiveAPI + 'articles/tags/' + this.$route.params.tag + '/' + this.loadCount + '/' + (this.totalcount))
       .then(response => {
-        if (response.data.length) {
-          this.info = response.data
-        } else {
-          this.loadMoreButton = 0
-        }
+        this.info = response.data
       })
       .catch(e => {
         this.errors.push(e)
@@ -33,12 +28,8 @@ export default {
       axios
         .get(process.env.LiveAPI + 'articles/tags/' + this.$route.params.tag + '/' + this.loadCount + '/' + (this.totalcount + count))
         .then(response => {
-          if (response.data.length) {
-            this.info.push(...response.data)
-            this.totalcount = this.totalcount + response.data.length
-          } else {
-            this.loadMoreButton = 0
-          }
+          this.info.push(...response.data)
+          this.totalcount = this.totalcount + response.data.length
         })
         .catch(e => {
           console.log(e)

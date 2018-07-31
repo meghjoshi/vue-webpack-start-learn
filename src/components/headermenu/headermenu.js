@@ -42,13 +42,12 @@ export default {
       this.menuItems.shift()
       this.menuItems.unshift({title: 'Create Post', link: '/create/post'})
       this.isLogin = true
-      let username = JSON.parse(Vue.localStorage.get('user')).username
-      var image = process.env.cloudinaryImageUrl + JSON.parse(Vue.localStorage.get('user')).profileImagePreference
+      var username = JSON.parse(Vue.localStorage.get('user')).username
+      var image = JSON.parse(Vue.localStorage.get('user')).profileImagePreference
       let rolevalue = JSON.parse(Vue.localStorage.get('user'))._role
       switch (rolevalue) {
         case '57db549862e4711c9dd1eed6':
         case '57db549862e4711c9dd1eed7':
-          this.superadmin[0] = {title: 'MY POSTS', link: '/' + username + '/myposts'}
           this.superadmin.push({
             title: `logged in as ` + username + ` <img src=` + image + ` height=30px width=30px>`,
             link: `/profile`
@@ -56,7 +55,6 @@ export default {
           this.upperMenu = this.superadmin
           break
         case '57db549862e4711c9dd1eed8':
-          this.editor[0] = {title: 'MY POSTS', link: '/' + username + '/myposts'}
           this.editor.push({
             title: `logged in as ` + username + ` <img src=` + image + ` height=30px width=30px>`,
             link: `/profile`
@@ -64,7 +62,6 @@ export default {
           this.upperMenu = this.editor
           break
         default:
-          this.subconauth[0] = {title: 'MY POSTS', link: '/' + username + '/myposts'}
           this.subconauth.push({
             title: `logged in as ` + username + ` <img src=` + image + ` height=30px width=30px>`,
             link: `/profile`

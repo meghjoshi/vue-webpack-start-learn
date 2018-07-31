@@ -1,0 +1,30 @@
+<div>
+  <headermenu />
+  <v-app>
+    <v-content>
+      <v-container >
+        <v-layout>
+          <v-flex xs12>
+            <v-avatar size = '180'>
+              <img
+                :src="userData.profileImagePreference"
+                :alt="userData.display_name" text-xs-center
+              >
+              <!--<v-content>-->
+                <v-layout>
+                  <v-flex xs12>
+                    <p class="font-weight-light display-1">{{userData.username}}</p>
+                    <p class="font-weight-bold headline grey--text">{{userData.display_name}}</p>
+                    <p class="font-weight-light display-1 grey--text">{{userData.links}}</p>
+                  </v-flex>
+                </v-layout>
+              <!--</v-content>-->
+            </v-avatar>
+            <p class="text-sm-left">Change Avtar</p>
+
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
+</div>
