@@ -26,9 +26,13 @@
                       <img :src="topSingleArticle._author.gravatar">
                     </v-avatar>
                     <router-link class="font-weight-bold subheading black--text"
+                                 v-if="topSingleArticle._author.username"
                                  :to="'/author/'+topSingleArticle._author.username"
                                  style="text-decoration: none">{{topSingleArticle._author.username}}
                     </router-link>
+                    <p class="font-weight-bold subheading black--text"
+                       v-if="!topSingleArticle._author.username"
+                       style="text-decoration: none">{{topSingleArticle._author.display_name}}></p>
                   </v-chip>
                   <!--</v-flex>-->
                 </v-flex>
@@ -56,8 +60,13 @@
                               </v-avatar>
                               <router-link class="font-weight-bold subheading black--text"
                                            :to="'/author/'+topThreeArticle._author.username"
+                                           v-if="topThreeArticle._author.username"
                                            style="text-decoration: none">{{topThreeArticle._author.username}}
                               </router-link>
+                              <p v-if="!topThreeArticle._author.username"
+                                 class="font-weight-bold subheading black--text"
+                                 style="text-decoration: none"
+                              >{{topThreeArticle._author.display_name}}</p>
                             </v-chip>
                           </v-flex>
                         </v-flex>
@@ -144,15 +153,15 @@
                 </router-link>
               </v-flex>
             </v-layout>
-            <v-btn text-xs-center v-on:click="articleLoadMore(10)">Load More Stories</v-btn>
+            <v-btn block text-xs-center v-on:click="articleLoadMore(10)">Load More Stories</v-btn>
           </v-flex>
           <v-flex xs3 order-md3 order-xs3 color="red darken-4" text-xs-center>
             <v-card dark tile flat color="error">
               <v-form ref="form" v-model="valid" lazy-validation>
-              <v-card-text><p class="text-center subheading">Get the Blavity Daily newsletter with the best community
-                finds and news.</p>
-                <hr>
-                <p class="text-center font-weight-bold title">Delivered To You</p>
+                <v-card-text><p class="text-center subheading">Get the Blavity Daily newsletter with the best community
+                  finds and news.</p>
+                  <hr>
+                  <p class="text-center font-weight-bold title">Delivered To You</p>
                   <v-text-field
                     required
                     label="Name"
@@ -166,8 +175,8 @@
                     v-model="email"
                     value="email"
                   ></v-text-field>
-              </v-card-text>
-              <v-btn outline class="text-center" :disabled="!valid" @click="newsletter()">Sign Me Up</v-btn>
+                </v-card-text>
+                <v-btn outline class="text-center" :disabled="!valid" @click="newsletter()">Sign Me Up</v-btn>
               </v-form>
             </v-card>
           </v-flex>

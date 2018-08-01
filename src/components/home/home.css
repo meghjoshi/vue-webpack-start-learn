@@ -1,49 +1,58 @@
-h1{
+h1 {
   font-family: Sentinel;
   font-size: 80px;
   font-style: normal;
   font-weight: 600;
   line-height: 90px;
 }
-.text-title{
+
+.text-title {
   margin: 0 auto;
 }
-.text-title h2{
+
+.text-title h2 {
   font-family: Sentinel;
   font-size: 68px;
   font-style: normal;
   font-weight: 600;
   line-height: 72px;
 }
+
 .elevated {
   margin-bottom: 58px;
   margin-left: auto;
   margin-right: auto;
 }
+
 p.elevated {
   font-family: Avenir Book;
   font-size: 36px;
   line-height: 48px;
 }
+
 .text-center {
-  text-align: center!important;
+  text-align: center !important;
 }
+
 @media only screen and (max-width: 600px) {
-  .text-title h2{
+  .text-title h2 {
     font-size: 36px;
     line-height: 42px;
   }
 }
-.text-primary{
+
+.text-primary {
   color: #3cccb7
 }
-.txtemail{
+
+.txtemail {
   background-color: #fff;
   font-size: 36px;
   line-height: 40px;
   padding: 28px 48px;
 }
-.btngetstarted .v-btn__content{
+
+.btngetstarted .v-btn__content {
   background-color: #3cccb7;
   border: none;
   color: #fff;
@@ -54,6 +63,7 @@ p.elevated {
   padding: .8em 2em;
   text-align: center;
 }
-.rounded-class{
-  border-radius:15px;
+
+.rounded-class {
+  border-radius: 15px;
 }

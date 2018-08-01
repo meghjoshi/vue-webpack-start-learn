@@ -1,30 +1,262 @@
 <div>
-  <headermenu />
-  <v-app>
-    <v-content>
-      <v-container >
-        <v-layout>
-          <v-flex xs12>
-            <v-avatar size = '180'>
-              <img
-                :src="userData.profileImagePreference"
-                :alt="userData.display_name" text-xs-center
-              >
-              <!--<v-content>-->
-                <v-layout>
-                  <v-flex xs12>
-                    <p class="font-weight-light display-1">{{userData.username}}</p>
-                    <p class="font-weight-bold headline grey--text">{{userData.display_name}}</p>
-                    <p class="font-weight-light display-1 grey--text">{{userData.links}}</p>
-                  </v-flex>
-                </v-layout>
-              <!--</v-content>-->
-            </v-avatar>
-            <p class="text-sm-left">Change Avtar</p>
+  <headermenu/>
+  <v-content>
+    <v-container grid-list-xl text-xs-center>
+      <v-layout row-wrap>
+        <v-flex xs10 offset-xs1>
+          <v-card>
+            <v-flex xs12>
+              <v-avatar size="150">
+                <img :src="cloudinaryImageUrl+userData.profileImagePreference" :alt="userData.display_name">
+              </v-avatar>
+            </v-flex>
+            <v-flex xs12>
+              <h1 v-if="userData.display_name">{{userData.display_name}}</h1>
+              <p v-if="userData.username" class="font-weight-thin text-uppercase font-italic">{{userData.username}}</p>
+            </v-flex>
+            <v-flex xs12>
+              <v-btn v-if="userData.links" :href="userData.links" fab small color="grey">
+                <v-icon color="white">public</v-icon>
+              </v-btn>
+              <v-btn v-if="userData.facebookProfileUrl" :href="userData.facebookProfileUrl" fab small color="primary">
+                <v-icon color="white">fab fa-facebook-f</v-icon>
+              </v-btn>
+              <v-btn v-if="userData.twitterProfileUrl" :href="userData.twitterProfileUrl" fab small color="blue">
+                <v-icon color="white">fab fa-twitter</v-icon>
+              </v-btn>
+              <v-btn v-if="userData.googleProfileUrl" :href="userData.googleProfileUrl" fab small color="red">
+                <v-icon color="white">fab fa-google-plus-g</v-icon>
+              </v-btn>
+              <v-btn v-if="userData.instagramProfileUrl" :href="userData.instagramProfileUrl" fab small
+                     color="light-blue darken-4">
+                <v-icon color="white">fab fa-instagram</v-icon>
+              </v-btn>
+            </v-flex>
+            <v-container fluid>
+              <v-layout>
+                <v-flex sm6>
+                  <v-dialog v-model="dialog1" persistent full-width>
+                    <v-btn slot="activator" depressed block color="grey lighten-4">
+                      <v-icon color="pink">fas fa-pen</v-icon>
+                      Change Profile
+                    </v-btn>
+                    <v-card>
+                      <v-toolbar flat>
+                        <span class="headline">Update Profile</span>
+                        <v-spacer></v-spacer>
+                        <v-btn dark depressed fab @click.native="dialog1 = false">
+                          <v-icon>close</v-icon>
+                        </v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <v-container>
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Display Name</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line v-model="userData.display_name"
+                                            value="userData.display_name"></v-text-field>
+                            </v-flex>
+                          </v-layout>
 
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
-  </v-app>
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Email</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line v-model="userData.email"
+                                            value="userData.email"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Username</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line v-model="userData.username"
+                                            value="userData.username"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Website</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line v-model="userData.links"
+                                            value="userData.links"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Facebook Url</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line placeholder="http://facebook.com"
+                                            v-model="userData.facebookProfileUrl"
+                                            value="userData.facebookProfileUrl"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Twitter Url</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line placeholder="http://twitter.com"
+                                            v-model="userData.twitterProfileUrl"
+                                            value="userData.twitterProfileUrl"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Instagram Url</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line placeholder="http://instagram.com"
+                                            v-model="userData.instagramProfileUrl"
+                                            value="userData.instagramProfileUrl"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Google Url</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line placeholder="http://google.com"
+                                            v-model="userData.googleProfileUrl"
+                                            value="userData.googleProfileUrl"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                          <v-layout wrap justify-center>
+                            <v-flex xs12 sm6 md4>
+                              <p class="text-md-left">Bio</p>
+                            </v-flex>
+                            <v-flex xs12 sm6 md8 justify-center>
+                              <v-text-field outline required single-line placeholder="Bio(About you)"
+                                            v-model="userData.bio" value="userData.bio"></v-text-field>
+                            </v-flex>
+                          </v-layout>
+
+                        </v-container>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" flat @click.native="dialog1 = false" @click="changeProfile()">
+                          Update
+                        </v-btn>
+                        <v-btn color="green darken-1" flat @click.native="dialog1 = false">Cancel</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+
+                </v-flex>
+                <v-flex sm6 color="grey lighten-4">
+                  <v-dialog v-model="dialog2" persistent full-width>
+                    <v-btn slot="activator" depressed block>
+                      <v-icon color="pink">fas fa-lock</v-icon>
+                      change password
+                    </v-btn>
+                    <v-card>
+                      <v-toolbar flat>
+                        <span class="headline">Change Password</span>
+                        <v-spacer></v-spacer>
+                        <v-btn dark depressed fab @click.native="dialog2 = false">
+                          <v-icon>close</v-icon>
+                        </v-btn>
+                      </v-toolbar>
+                      <v-card-text>
+                        <v-container>
+                          <v-form ref="form" lazy-validation>
+                            <v-layout wrap justify-center>
+                              <v-flex xs12 sm6 md4>
+                                <p class="text-md-left">Current Password</p>
+                              </v-flex>
+                              <v-flex xs12 sm6 md8 justify-center>
+                                <v-text-field
+                                  outline
+                                  single-line
+                                  v-model="currentpassword"
+                                  :append-icon="show1 ? 'visibility_off' : 'visibility'"
+                                  :rules="[rules.required, rules.min]"
+                                  :type="show1 ? 'text' : 'password'"
+                                  hint="At least 8 characters"
+                                  counter
+                                  placeholder="Current Password"
+                                  @click:append="show1 = !show1"
+                                ></v-text-field>
+                              </v-flex>
+                            </v-layout>
+
+                            <v-layout wrap justify-center>
+                              <v-flex xs12 sm6 md4>
+                                <p class="text-md-left">New Password</p>
+                              </v-flex>
+                              <v-flex xs12 sm6 md8 justify-center>
+                                <v-text-field
+                                  outline
+                                  single-line
+                                  v-model="newpassword"
+                                  :append-icon="show2 ? 'visibility_off' : 'visibility'"
+                                  :rules="[rules.required, rules.min, rules.passMatch]"
+                                  :type="show2 ? 'text' : 'password'"
+                                  hint="At least 8-20 characters"
+                                  counter
+                                  placeholder="New Password"
+                                  @click:append="show2 = !show2"
+                                ></v-text-field>
+                              </v-flex>
+                            </v-layout>
+
+                            <v-layout wrap justify-center>
+                              <v-flex xs12 sm6 md4>
+                                <p class="text-md-left">Password Again</p>
+                              </v-flex>
+                              <v-flex xs12 sm6 md8 justify-center>
+                                <v-text-field
+                                  outline
+                                  single-line
+                                  v-model="passwordagain"
+                                  :append-icon="show3 ? 'visibility_off' : 'visibility'"
+                                  :rules="[rules.required, rules.min, rules.passMatch]"
+                                  :type="show3 ? 'text' : 'password'"
+                                  hint="At least 8-20 characters"
+                                  counter
+                                  placeholder="Password Again"
+                                  @click:append="show3 = !show3"
+                                ></v-text-field>
+                              </v-flex>
+                            </v-layout>
+                          </v-form>
+                        </v-container>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" flat @click.native="dialog2 = false" @click="updatePassword()">
+                          Update
+                        </v-btn>
+                        <v-btn color="green darken-1" flat @click.native="dialog2 = false">Cancel</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-flex>
+              </v-layout>
+            </v-container>
+
+            <v-layout>
+              <v-flex xs12>
+                <p v-if="userData.bio" class="text-center subheading">{{userData.bio}}</p>
+              </v-flex>
+            </v-layout>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
 </div>

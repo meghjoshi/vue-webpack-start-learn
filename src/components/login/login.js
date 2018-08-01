@@ -60,7 +60,7 @@ export default {
   methods: {
     submit () {
       axios
-        .post(process.env.LocalAPI + 'auth/authenticate', {
+        .post(process.env.LiveAPI + 'auth/authenticate', {
           'user': {
             'email': this.email,
             'password': this.password

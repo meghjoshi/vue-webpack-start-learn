@@ -13,60 +13,94 @@ export default {
     submittedData: [],
     publishedData: [],
     scheduledData: [],
-    urlArray: [process.env.LiveAPI + 'articles/3/0', process.env.LiveAPI + 'articles/3/0', process.env.LiveAPI + 'articles/3/0', process.env.LiveAPI + 'articles/3/0'],
-    username: null,
     image: null,
     displayname: null,
     loadcount: 3,
-    totalcount: 0
+    totalCountDraft: 0,
+    totalCountSubmited: 0,
+    totalCountPublish: 0,
+    totalCountScheduled: 0,
+    username: JSON.parse(Vue.localStorage.get('user')).username,
+    urlArray: [
+      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft,
+      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited,
+      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish,
+      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled
+    ]
   }),
   components: {
     headermenu
-  },
-  methods: {
-    useNull () {
-      return null
-    }
-    // postLoadMore: function (total) {
-    //   debugger
-    //   let _this = this
-    //   _this.url1 = LiveAPI+`articles/` + _this.loadcount + `/ ` + (_this.totalcount + total)
-    //   _this.url2 = LiveAPI+`v1/articles/` + _this.loadcount + `/ ` + (_this.totalcount + total)
-    //   _this.url3 = LiveAPI+`v1/articles/` + _this.loadcount + `/ ` + (_this.totalcount + total)
-    //   _this.url4 = LiveAPI+`v1/articles/` + _this.loadcount + `/ ` + (_this.totalcount + total)
-    //   _this.urlArray = [_this.url1, _this.url2, _this.url3, _this.url4]
-    //   axios.all([
-    //     axios.get(this.urlArray[0]).catch(null),
-    //     axios.get(this.urlArray[1]).catch(null),
-    //     axios.get(this.urlArray[2]).catch(null),
-    //     axios.get(this.urlArray[3]).catch(null)
-    //   ]).then(axios.spread(function (res1, res2, res3, res4) {
-    //     _this.draftData.push(...res1.data)
-    //     _this.submittedData.push(...res2.data)
-    //     _this.publishedData.push(...res3.data)
-    //     _this.scheduledData.push(...res4.data)
-    //
-    //     this.totalcount += res1.data.length
-    //   }))
-    // }
   },
   mounted () {
     let _this = this
     if (Vue.localStorage.get('user')) {
       _this.displayname = JSON.parse(Vue.localStorage.get('user')).display_name
       _this.username = JSON.parse(Vue.localStorage.get('user')).username
-      _this.image = JSON.parse(Vue.localStorage.get('user')).profileImagePreference
+      _this.image = this.baseImageUrl + JSON.parse(Vue.localStorage.get('user')).profileImagePreference
       axios.all([
-        axios.get(_this.urlArray[0]).catch(null),
-        axios.get(_this.urlArray[1]).catch(null),
-        axios.get(_this.urlArray[2]).catch(null),
-        axios.get(_this.urlArray[3]).catch(null)
+        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft).catch(null),
+        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited).catch(null),
+        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish).catch(null),
+        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled).catch(null)
       ]).then(axios.spread(function (res1, res2, res3, res4) {
-        _this.draftData = res1.data
-        _this.submittedData = res2.data
-        _this.publishedData = res3.data
-        _this.scheduledData = res4.data
+        _this.draftData = res1.data.articles
+        _this.totalCountDraft += parseInt(res1.data.articles.length)
+        _this.submittedData = res2.data.articles
+        _this.totalCountSubmited += parseInt(res2.data.articles.length)
+        _this.publishedData = res3.data.articles
+        _this.totalCountPublish += parseInt(res3.data.articles.length)
+        _this.scheduledData = res4.data.articles
+        _this.totalCountScheduled += parseInt(res4.data.articles.length)
+
       }))
+    } else {
+      this.$router.push('/')
+    }
+  },
+  methods: {
+    loadMore (total, postname) {
+      let _this = this
+      switch (postname) {
+        case 'draft_post':
+          axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft)
+            .then((res) => {
+              _this.draftData.push(...res.data.articles)
+              _this.totalCountDraft += res.data.articles.length
+            })
+          break
+        case 'submit_review_post':
+          // axios.get(process.env.LocalAPI + 'articles/' + _this.loadcount + '/' + (_this.totalCountSubmited + total))
+          axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited)
+            .then((res) => {
+              _this.submittedData.push(...res.data.articles)
+              _this.totalcount2 += res.data.articles.length
+            })
+          break
+        case 'publish_post':
+          axios.get(process.env.LocalAPI + 'articles/' + _this.loadcount + '/' + (_this.totalCountPublish + total))
+            .then((res) => {
+              _this.publishedData.push(...res.data.articles)
+              _this.totalcount3 += res.data.articles.length
+            })
+          break
+        case 'schedule_post':
+          axios.get(process.env.LocalAPI + 'articles/' + _this.loadcount + '/' + (_this.totalCountScheduled + total))
+            .then((res) => {
+              _this.scheduledData.push(...res.data.articles)
+              _this.totalcount4 += res.data.articles.length
+            })
+          break
+        default:
+          _this.draftData = []
+          _this.submittedData = []
+          _this.publishedData = []
+          _this.scheduledData = []
+          _this.totalCountDraft = 0
+          _this.totalCountSubmited = 0
+          _this.totalCountPublish = 0
+          _this.totalCountScheduled = 0
+          break
+      }
     }
   }
 }

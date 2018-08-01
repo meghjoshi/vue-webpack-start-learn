@@ -2,11 +2,12 @@
   <v-app>
     <headermenu/>
     <v-content>
-      <v-container grid-list-md text-xs-center>
+      <v-container grid-list-md>
         <v-layout row wrap>
           <v-flex xs12 class="text-sm-left">
-            Posted Under: <span v-for="(cat, index) in singlearticle.categories">{{cat.name}} <span
-            v-if="index+1 !== singlearticle.categories.length">, </span> </span>
+            Posted Under: <span v-for="(cat, index) in singlearticle.categories"><v-btn round small outline color="grey"
+                                                                                        :to="'/categories/'+cat.slug.toLowerCase()">{{cat.name}} </v-btn><span
+            v-if="index+1 !== singlearticle.categories.length">  </span> </span>
           </v-flex>
           <v-flex xs12 sm6 class="text-sm-left">
             <h1>{{singlearticle.title}}</h1>
@@ -21,6 +22,14 @@
                   :src="cloudinaryImageUrl+singlearticle.wp_featuredImage"
                   height="30%">
               </v-avatar>
+              <router-link class="font-weight-bold subheading black--text"
+                           v-if="singlearticle._author.username"
+                           :to="'/author/'+singlearticle._author.username"
+                           style="text-decoration: none">{{singlearticle._author.username}}
+              </router-link>
+              <p v-if="!singlearticle._author.username"
+                 class="font-weight-bold subheading black--text"
+                 style="text-decoration: none">{{singlearticle._author.display_name}}></p>
             </v-chip>
           </v-flex>
           <v-flex xs12 class="text-sm-left">
@@ -30,6 +39,14 @@
           </v-flex>
           <v-flex xs12 class="text-sm-left">
             <p class="headline"><span v-html='singlearticle.body'></span></p>
+          </v-flex>
+          <v-flex xs12 sm2>
+            <p class="text-sm-left font-weight-medium subheading">More stories tagged with:</p>
+          </v-flex>
+          <v-flex xs12 sm10 align-start>
+            <v-btn outline small color="black" v-for="(tagData, i) in singlearticle.tags" :key="i" :to="'tag/'+tagData.slug">
+              {{tagData.name}}
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-container>

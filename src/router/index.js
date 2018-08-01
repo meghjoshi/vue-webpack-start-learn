@@ -9,11 +9,11 @@ import singlearticle from '../components/singlearticle/singlearticle.vue'
 import profile from '../components/profile/profile.vue'
 import tag from '../components/tag/tag.vue'
 import myposts from '../components/myposts/myposts.vue'
+import post from '../components/post/post.vue'
 import login from '../components/login/login.vue'
 import logout from '../components/logout/logout.vue'
 import PageNotFound from '../components/404/404.vue'
 import register from '../components/register/register.vue'
-
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
@@ -52,7 +52,7 @@ export default new Router({
       component: profile
     },
     {
-      path: '/myposts',
+      path: '/:username/myposts',
       name: 'myposts',
       component: myposts
     },
@@ -60,6 +60,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/post',
+      name: 'post',
+      component: post
     },
     {
       path: '/register',

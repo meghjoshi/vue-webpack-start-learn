@@ -14,17 +14,21 @@
                     style="background: cover"
                   >
                   </v-card-media>
-                  <v-card-title primary-title >
+                  <v-card-title primary-title>
                     <div>
-                      <router-link class="font-weight-bold headline"  :to="'/user/'+item._id" style="font-weight: bolder;text-decoration: none">{{item.title}}</router-link>
+                      <router-link class="font-weight-bold headline" :to="'/'+item.slug"
+                                   style="font-weight: bolder;text-decoration: none">{{item.title}}
+                      </router-link>
                       <br>
                       <br>
                       <span v-for="(cat, index) in item.categories" class="font-weight-bold" style="color: #3cccb7">
-                        <router-link class="font-weight-bold"  :to="'/categories/'+cat.slug" style="font-weight: bolder;text-decoration: none">{{cat.name}}</router-link>
+                        <router-link class="font-weight-bold" :to="'/categories/'+cat.slug"
+                                     style="font-weight: bolder;text-decoration: none">{{cat.name}}</router-link>
                         <span v-if="index+1 !== item.categories.length">, </span>
                       </span>
-                      <span v-if="item._author.username" >|
-                        <router-link class="font-weight-bold"  :to="'/author/'+item._author.username" style="font-weight: bolder;text-decoration: none">{{item._author.username}}</router-link>
+                      <span v-if="item._author.username">|
+                        <router-link class="font-weight-bold" :to="'/author/'+item._author.username"
+                                     style="font-weight: bolder;text-decoration: none">{{item._author.username}}</router-link>
                       </span>
                     </div>
                   </v-card-title>
