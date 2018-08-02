@@ -1,6 +1,6 @@
 <div>
   <headermenu/>
-  <v-content>
+  <v-content class="padding0">
     <v-container>
       <v-layout>
         <v-flex xs12>
@@ -13,7 +13,7 @@
     </v-container>
     <!--drafts posts start-->
     <v-container>
-      <v-content>
+      <v-content class="padding0">
         <v-container>
           <v-layout v-for="(singleDraftData, i) in draftData" key="i">
             <v-flex xs12 sm4 pr-4 pb-4>
@@ -46,7 +46,7 @@
   </v-content>
   <!--draft posts end-->
   <!--submitted for review start-->
-  <v-content>
+  <v-content class="padding0">
     <v-container>
       <v-layout>
         <v-flex xs12>
@@ -54,7 +54,7 @@
         </v-flex>
       </v-layout>
       <hr>
-      <v-content>
+      <v-content class="padding0">
         <v-container>
           <v-layout v-for="(SubmittedArticle, i) in submittedData" key="i">
             <v-flex xs12 sm4 pr-4 pb-4>
@@ -87,7 +87,7 @@
   </v-content>
   <!--submitted for review end-->
   <!--Published posts start-->
-  <v-content>
+  <v-content class="padding0">
     <v-container>
       <v-layout>
         <v-flex xs12>
@@ -95,7 +95,7 @@
         </v-flex>
       </v-layout>
       <hr>
-      <v-content>
+      <v-content class="padding0">
         <v-container>
           <v-layout v-for="(publishedArticle, i) in publishedData" key="i">
             <v-flex xs12 sm4 pr-4 pb-4>
@@ -128,7 +128,7 @@
   </v-content>
   <!--Published posts ends-->
   <!--Scheduled posts start-->
-  <v-content>
+  <v-content class="padding0">
     <v-container>
       <v-layout>
         <v-flex xs12>
@@ -136,7 +136,7 @@
         </v-flex>
       </v-layout>
       <hr>
-      <v-content>
+      <v-content class="padding0">
         <v-container>
           <v-layout v-for="(scheduleArticle, i) in scheduledData" key="i">
             <v-flex xs12 sm4 pr-4 pb-4>

@@ -4,18 +4,22 @@
     <v-content>
       <v-container grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 class="text-sm-left">
-            Posted Under: <span v-for="(cat, index) in singlearticle.categories"><v-btn round small outline color="grey"
-                                                                                        :to="'/categories/'+cat.slug.toLowerCase()">{{cat.name}} </v-btn><span
-            v-if="index+1 !== singlearticle.categories.length">  </span> </span>
+          <v-flex xs12 sm9 class="text-sm-left">
+            Posted Under:
+            <span v-for="(cat, index) in singlearticle.categories">
+              <router-link class="font-weight-bold headline" :to="'/categories/'+cat.slug">
+                {{cat.name}}
+              </router-link>
+              <span v-if="index+1 !== singlearticle.categories.length">, </span>
+            </span>
           </v-flex>
-          <v-flex xs12 sm6 class="text-sm-left">
+          <v-flex xs12 sm9 class="text-sm-left title">
             <h1>{{singlearticle.title}}</h1>
           </v-flex>
-          <v-flex xs12 class="text-sm-left title">
-            <h4>{{singlearticle.subTitle}}</h4>
+          <v-flex xs12 sm9 class="text-sm-left ">
+            <h3>{{singlearticle.subTitle}}</h3>
           </v-flex>
-          <v-flex xs12 class="text-sm-left title">
+          <v-flex xs12 sm9 class="text-sm-left">
             <v-chip>
               <v-avatar>
                 <img
@@ -32,21 +36,23 @@
                  style="text-decoration: none">{{singlearticle._author.display_name}}></p>
             </v-chip>
           </v-flex>
-          <v-flex xs12 class="text-sm-left">
+          <v-flex xs12 sm9 class="text-sm-left">
             <img
               :src="cloudinaryImageUrl+singlearticle.wp_featuredImage"
               height="100%" width="70%">
           </v-flex>
-          <v-flex xs12 class="text-sm-left">
+          <v-flex xs12 sm9 class="text-sm-left">
             <p class="headline"><span v-html='singlearticle.body'></span></p>
           </v-flex>
-          <v-flex xs12 sm2>
-            <p class="text-sm-left font-weight-medium subheading">More stories tagged with:</p>
-          </v-flex>
-          <v-flex xs12 sm10 align-start>
-            <v-btn outline small color="black" v-for="(tagData, i) in singlearticle.tags" :key="i" :to="'tag/'+tagData.slug">
-              {{tagData.name}}
-            </v-btn>
+          <v-flex xs12 sm9 class="text-sm-left" v-if="singlearticle.tags.length">
+            <hr>
+            <h1>Tags</h1>
+            <span v-for="(tag, index) in singlearticle.tags">
+              <router-link class="font-weight-bold headline" :to="'/tag/'+tag.slug">
+                {{tag.name}}
+              </router-link>
+              <span v-if="index+1 !== singlearticle.tags.length">, </span>
+            </span>
           </v-flex>
         </v-layout>
       </v-container>

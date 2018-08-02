@@ -1,0 +1,66 @@
+<div>
+  <headermenu/>
+  <!--drafts posts start-->
+  <v-content>
+    <v-container>
+      <!--draft posts start-->
+      <v-layout>
+        <v-flex xs12>
+          <p class="display-1 font-weight-light">
+            {{selected_filter}}
+          </p>
+        </v-flex>
+        <v-spacer></v-spacer>
+        <v-btn color="lime darken-4" flat>New Post</v-btn>
+      </v-layout>
+      <v-layout>
+        <v-flex xs12>
+          <v-select
+            :items="filter"
+            v-model="selected_filter"
+            item-value="text"
+            hide-details
+            id="langSelect"
+          ></v-select>
+          <v-combobox
+            :items="userList"
+            hide-details
+            @keypress="userListchangedValue"
+            id="langSelect"
+          ></v-combobox>
+        </v-flex>
+      </v-layout>
+      <v-content>
+        <v-container>
+          <v-layout v-for="(item, i) in draftData" :key="i">
+            <v-flex xs12 sm4 pr-4 pb-4>
+              <v-card>
+                <v-card-media
+                  :src="baseImageUrl+item.wp_featuredImage"
+                  height="180px"
+                ></v-card-media>
+              </v-card>
+            </v-flex>
+            <v-flex xs12 sm8 pr-4>
+              <v-container>
+                <h2>{{item.title}}</h2>
+                <br>
+                <v-avatar size="48">
+                  <img :src="image" :alt="username">
+                </v-avatar>
+                <router-link class="font-weight-bold subheading black--text" :to="'/author/'+username"
+                             style="text-decoration: none">{{displayname}}
+                </router-link>
+              </v-container>
+            </v-flex>
+          </v-layout>
+          <br>
+          <v-btn text-xs-center v-on:click="articleLoadMore(10)">Load More Stories</v-btn>
+        </v-container>
+      </v-content>
+      <!--draft posts start-->
+    </v-container>
+  </v-content>
+  <!--draft posts ends-->
+
+</div>

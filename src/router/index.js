@@ -14,6 +14,7 @@ import login from '../components/login/login.vue'
 import logout from '../components/logout/logout.vue'
 import PageNotFound from '../components/404/404.vue'
 import register from '../components/register/register.vue'
+import authorSubmissions from '../components/authorSubmissions/authorSubmissions.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
@@ -80,6 +81,11 @@ export default new Router({
       path: '/mail/verification/:verification',
       name: 'login',
       component: login
+    },
+    {
+      path: '/authorSubmissions',
+      name: 'authorSubmissions',
+      component: authorSubmissions
     },
     {
       path: '/:slug',

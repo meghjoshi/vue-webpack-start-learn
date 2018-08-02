@@ -34,7 +34,9 @@
               </v-flex>
               <v-flex xs12>
                 <hr>
-                <v-btn class="text-xs-right" flat color="blue" v-on:click="loadmore(6)">More Info --></v-btn>
+                <v-btn class="text-xs-right" flat color="blue" v-if="loadMoreButton" v-on:click="loadmore(6)">More Info
+                  -->
+                </v-btn>
               </v-flex>
             </v-layout>
           </v-container>
