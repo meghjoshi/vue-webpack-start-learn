@@ -15,26 +15,25 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get(process.env.LiveAPI + 'articles/categories/' + this.$route.params.category + '/' + this.loadCount + '/' + (this.totalcount))
-      .then(response => {
-        if (response.data.length) {
-          this.info = response.data
-        } else {
-          this.loadMoreButton = 0
-        }
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+    this.loadmore()
+  },
+  watch: {
+    $route () {
+      this.totalcount = 0
+      this.loadmore()
+    }
   },
   methods: {
-    loadmore: function (count) {
+    loadmore: function () {
       axios
-        .get(process.env.LiveAPI + 'articles/categories/' + this.$route.params.category + '/' + this.loadCount + '/' + (this.totalcount + count))
+        .get(process.env.LiveAPI + 'articles/categories/' + this.$route.params.category + '/' + this.loadCount + '/' + (this.totalcount))
         .then(response => {
           if (response.data.length) {
-            this.info.push(...response.data)
+            if (!this.info.length) {
+              this.info = (response.data)
+            } else {
+              this.info.push(...response.data)
+            }
             this.totalcount = this.totalcount + response.data.length
           } else {
             this.loadMoreButton = 0

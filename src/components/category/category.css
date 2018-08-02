@@ -6,3 +6,12 @@ a.font-weight-bold.headline {
   max-height: 100px;
 
 }
+
+.linkclass {
+  font-weight: bolder;
+  text-decoration: none
+}
+
+span .textcolor {
+  color: #3cccb7;
+}

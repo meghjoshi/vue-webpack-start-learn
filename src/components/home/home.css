@@ -67,3 +67,19 @@ p.elevated {
 .rounded-class {
   border-radius: 15px;
 }
+
+.backgroundcolor {
+  background-color: #f4f4f4
+}
+
+.textdecoration {
+  text-decoration: none
+}
+
+.maxwidth {
+  max-width: 100%
+}
+
+.layoutcolor {
+  background-color: dimgray
+}

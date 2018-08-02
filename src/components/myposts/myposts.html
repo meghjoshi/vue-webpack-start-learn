@@ -30,15 +30,15 @@
                 <v-avatar size="48">
                   <img :src="image" :alt="username">
                 </v-avatar>
-                <router-link class="font-weight-bold subheading black--text" :to="'/author/'+username"
-                             style="text-decoration: none">{{displayname}}
+                <router-link class="decoration font-weight-bold subheading black--text" :to="'/author/'+username"
+                             >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>
           </v-layout>
           <br>
           <v-layout justify-center>
-            <v-btn style="text-align: center" outline @click="loadMore(3,'draft_post')">Load More</v-btn>
+            <v-btn class="textalign" outline @click="loadMore(3,'draft_post')">Load More</v-btn>
           </v-layout>
         </v-container>
       </v-content>
@@ -71,8 +71,8 @@
                 <v-avatar size="48">
                   <img :src="image" :alt="username">
                 </v-avatar>
-                <router-link class="font-weight-bold subheading black--text" :to="'/author/'+username"
-                             style="text-decoration: none">{{displayname}}
+                <router-link class="font-weight-bold subheading black--text decoration" :to="'/author/'+username"
+                             >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>
@@ -112,8 +112,8 @@
                 <v-avatar size="48">
                   <img :src="image" :alt="username">
                 </v-avatar>
-                <router-link class="font-weight-bold subheading black--text" :to="'/author/'+username"
-                             style="text-decoration: none">{{displayname}}
+                <router-link class="font-weight-bold subheading black--text decoration" :to="'/author/'+username"
+                             >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>
@@ -153,8 +153,8 @@
                 <v-avatar size="48">
                   <img :src="image" :alt="username">
                 </v-avatar>
-                <router-link class="font-weight-bold subheading black--text" :to="'/author/'+username"
-                             style="text-decoration: none">{{displayname}}
+                <router-link class="font-weight-bold subheading black--text decoration" :to="'/author/'+username"
+                             >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>

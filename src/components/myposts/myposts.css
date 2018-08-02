@@ -1,3 +1,11 @@
 .padding0 {
   padding: 0 0 0 0 !important;
 }
+
+.decoration {
+  text-decoration: none;
+}
+
+.textalign {
+  text-align: center;
+}

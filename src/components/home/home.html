@@ -6,15 +6,14 @@
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-container raised hover fill-height style="background-color: #f4f4f4">
+            <v-container raised hover fill-height class="backgroundcolor">
               <v-layout align-center v-for="topSingleArticle in articleData.slice(0,1)" :key="topSingleArticle._id">
                 <v-flex sm6>
-                  <img style="max-width: 100%" :src="cloudinaryImageUrl+topSingleArticle.wp_featuredImage">
+                  <img class="maxwidth" :src="cloudinaryImageUrl+topSingleArticle.wp_featuredImage">
                 </v-flex>
                 <v-flex xs12 sm6>
                   <router-link :to="'/'+topSingleArticle.slug"
-                               style="text-decoration: none"
-                               class="title font-weight-medium black--text">{{topSingleArticle.title}}
+                               class="title font-weight-medium black--text textdecoration">{{topSingleArticle.title}}
                   </router-link>
                   <!--<v-flex xs12 sm6 text-xs-center>-->
                   <br>
@@ -25,14 +24,14 @@
                     <v-avatar>
                       <img :src="topSingleArticle._author.gravatar">
                     </v-avatar>
-                    <router-link class="font-weight-bold subheading black--text"
+                    <router-link class="font-weight-bold subheading black--text textdecoration"
                                  v-if="topSingleArticle._author.username"
                                  :to="'/author/'+topSingleArticle._author.username"
-                                 style="text-decoration: none">{{topSingleArticle._author.username}}
+                                 >{{topSingleArticle._author.username}}
                     </router-link>
-                    <p class="font-weight-bold subheading black--text"
+                    <p class="font-weight-bold subheading black--text textdecoration"
                        v-if="!topSingleArticle._author.username"
-                       style="text-decoration: none">{{topSingleArticle._author.display_name}}></p>
+                       >{{topSingleArticle._author.display_name}}></p>
                   </v-chip>
                   <!--</v-flex>-->
                 </v-flex>
@@ -50,22 +49,21 @@
                     <v-container fill-height fluid>
                       <v-layout fill-height>
                         <v-flex xs12 align-end flexbox>
-                          <router-link class="font-weight-bold headline white--text" :to="'/'+topThreeArticle.slug"
-                                       style="text-decoration: none">{{topThreeArticle.title}}
+                          <router-link class="font-weight-bold headline white--text textdecoration" :to="'/'+topThreeArticle.slug"
+                                       >{{topThreeArticle.title}}
                           </router-link>
                           <v-flex xs12 class="text-sm-left">
                             <v-chip>
                               <v-avatar>
                                 <img :src="topThreeArticle._author.gravatar">
                               </v-avatar>
-                              <router-link class="font-weight-bold subheading black--text"
+                              <router-link class="font-weight-bold subheading black--text textdecoration"
                                            :to="'/author/'+topThreeArticle._author.username"
                                            v-if="topThreeArticle._author.username"
-                                           style="text-decoration: none">{{topThreeArticle._author.username}}
+                                           >{{topThreeArticle._author.username}}
                               </router-link>
                               <p v-if="!topThreeArticle._author.username"
-                                 class="font-weight-bold subheading black--text"
-                                 style="text-decoration: none"
+                                 class="font-weight-bold subheading black--text textdecoration"
                               >{{topThreeArticle._author.display_name}}</p>
                             </v-chip>
                           </v-flex>
@@ -100,14 +98,13 @@
 
               <v-card-title primary-title>
                 <div>
-                  <router-link class="font-weight-bold subheading black--text" :to="'/'+videoArticle.slug"
-                               style="text-decoration: none">{{videoArticle.title}}
+                  <router-link class="font-weight-bold subheading black--text textdecoration" :to="'/'+videoArticle.slug"
+                               >{{videoArticle.title}}
                   </router-link>
                   <br>
                   <div>
-                    <router-link class="body-2 black--text"
+                    <router-link class="body-2 black--text textdecoration"
                                  :to="'/'+videoArticle.slug"
-                                 style="text-decoration: none"
                                  v-html="videoArticle.body.substring(0,240)+'...'">
                     </router-link>
                   </div>
@@ -138,18 +135,18 @@
               <v-flex xs12 sm4 pl-3 pr-3 pb-3>
                 <v-card>
                   <v-card-media :src="cloudinaryImageUrl+newsFeaturesArticles.wp_featuredImage" height="200px"
-                                style=""></v-card-media>
+                                ></v-card-media>
                 </v-card>
               </v-flex>
               <v-flex xs12 sm8 pl-3 pr-3>
-                <router-link class="font-weight-black title text-sm-center black--text"
+                <router-link class="font-weight-black title text-sm-center black--text textdecoration"
                              :to="'/'+newsFeaturesArticles.slug"
-                             style="text-decoration: none">{{newsFeaturesArticles.title}}
+                             >{{newsFeaturesArticles.title}}
                 </router-link>
                 <p class="body-2 text-sm-left font-weight-thin">{{newsFeaturesArticles.subTitle}}</p>
-                <router-link class="font-weight-black title black--text"
+                <router-link class="font-weight-black title black--text textdecoration"
                              :to="'/author/'+newsFeaturesArticles._author.username"
-                             style="text-decoration: none">{{newsFeaturesArticles._author.username}}
+                             >{{newsFeaturesArticles._author.username}}
                 </router-link>
               </v-flex>
             </v-layout>
@@ -194,7 +191,7 @@
     <!--community Start-->
     <v-content fluid>
       <!--<v-container fluid grid-list-md text-xs-center>-->
-      <v-layout row wrap style="background-color: dimgray">
+      <v-layout row wrap class="layoutcolor">
         <v-flex xs12 class="text-title pt-4 pb-0 ">
           <h3 class="font-weight-bold text-center white--text headline">Top Community Submitted Articles This Week</h3>
         </v-flex>
@@ -210,17 +207,17 @@
                     <v-container fill-height fluid>
                       <v-layout fill-height>
                         <v-flex xs12 align-end flexbox>
-                          <router-link class="font-weight-medium headline white--text" :to="'/'+communityArticles.slug"
-                                       style="text-decoration: none">{{communityArticles.title}}
+                          <router-link class="font-weight-medium headline white--text textdecoration" :to="'/'+communityArticles.slug"
+                                       >{{communityArticles.title}}
                           </router-link>
                           <v-flex xs12 class="text-sm-left">
                             <v-chip>
                               <v-avatar>
                                 <img :src="communityArticles._author.gravatar">
                               </v-avatar>
-                              <router-link class="font-weight-black title black--text"
+                              <router-link class="font-weight-black title black--text textdecoration"
                                            :to="'/author/'+communityArticles._author.username"
-                                           style="text-decoration: none">{{communityArticles._author.username}}
+                                           >{{communityArticles._author.username}}
                               </router-link>
                             </v-chip>
                           </v-flex>
