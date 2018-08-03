@@ -5,53 +5,39 @@
     <v-container>
       <!--draft posts start-->
       <v-layout>
-        <v-flex xs2 text-center pr-1 pt-2>
-          <h1>
-            {{selected_filter.text}}
-          </h1>
+        <v-flex xs3 class="font-weight-black strong text-center pt-2 underline">
+          <p class="display-1 font-weight-light text-center">
+            Pending Post
+          </p>
         </v-flex>
-        <v-flex xs2 pl-2 pr-2>
-          <v-select
-            :items="filter"
-            v-model="selected_filter"
-            item-value="shortCode"
-            item-text="text"
-            hide-details
-            return-object
-            @change="onchange()"
-            id="langSelect"
-          ></v-select>
-        </v-flex>
-        <v-flex xs3 pl-2 pr-2>
+        <v-flex xs3 class="pr-3">
           <v-combobox
-            v-model="authorName"
+            v-model="selecteduser"
             :items="userList"
             hide-details
-            placeholder='Search User'
             @keypress="userListchangedValue"
-            @change="onauthorchange()"
+            @change="userListchangedValue"
+            placeholder="Select User"
             id="langSelect"
           ></v-combobox>
         </v-flex>
-        <v-flex xs3 pl-2 pr-2>
+        <v-flex xs4 class="pl-3">
           <v-text-field
-            required
-            v-model="txtsearch"
-            placeholder='Type here to search'>
-          </v-text-field>
+            v-model="search"
+            label="Search"
+          ></v-text-field>
         </v-flex>
-        <v-flex xs1 pl-2 pr-2>
-          <v-btn @click="searchBtn()">
-            <v-icon>search</v-icon>
+        <v-flex xs2 class="pl-3">
+          <v-btn block xs4 class="block"
+                 :disabled="!search"
+                 v-on:click="articleLoadMore(-1)">
+            Search
           </v-btn>
         </v-flex>
-        <v-flex xs1 pl-2 pr-2>
-          <v-btn>Reset</v-btn>
-        </v-flex>
       </v-layout>
-      <v-content>
-        <v-container>
-          <v-layout v-for="(item, i) in articleData" :key="i">
+      <v-content class="padding0">
+        <v-container class="">
+          <v-layout v-for="(item, i) in draftData" :key="i">
             <v-flex xs12 sm4 pr-4 pb-4>
               <v-card>
                 <v-card-media
@@ -62,12 +48,13 @@
             </v-flex>
             <v-flex xs12 sm8 pr-4>
               <v-container>
-                <h2 v-if="item.title">{{item.title}}</h2>
+                <h2>{{item.title}}</h2>
                 <br>
+                <h4 class="text-decoration-none">{{item.updatedAt }}</h4>
                 <router-link class="font-weight-bold subheading black--text text-decoration-none"
                              :to="'/author/'+item._author.username">
                   <v-avatar size="48">
-                    <img :src="item._author.profileImagePreference">
+                    <img :src="item._author.profileImagePreference" :alt="item._author.username">
                   </v-avatar>
                   <span v-if="item._author.display_name">
                     {{item._author.display_name}}
@@ -80,7 +67,11 @@
             </v-flex>
           </v-layout>
           <br>
-          <v-btn block text-xs-center v-on:click="articleLoadMore(3)">Load More Stories</v-btn>
+          <v-btn block text-xs-center
+                 v-if="articleLoadMoreButton"
+                 v-on:click="articleLoadMore(10)"
+          >Load More Stories
+          </v-btn>
         </v-container>
       </v-content>
       <!--draft posts start-->

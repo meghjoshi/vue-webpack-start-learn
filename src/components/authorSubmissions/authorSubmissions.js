@@ -5,10 +5,11 @@ import axios from 'axios'
 export default {
   data: () => ({
     baseImageUrl: process.env.cloudinaryImageUrl,
-    draftData: [],
+    txtsearch: '',
+    articleData: [],
     userList: [],
-    urlArray: process.env.LiveAPI + 'articles/status/',
     username: null,
+    authorName: '',
     image: null,
     displayname: null,
     selecteduser: '',
@@ -22,7 +23,8 @@ export default {
       {shortCode: 'draft', text: 'Draft Post'}
     ],
     fetchedLocale: '',
-    setLocale: null
+    setLocale: null,
+    urlArray: process.env.LiveAPI + 'articles/status/'
   }),
   components: {
     headermenu
@@ -30,9 +32,15 @@ export default {
   methods: {
     articleLoadMore: function (total) {
       let _this = this
-      axios.get(_this.urlArray + _this.loadcount + '/' + _this.totalcount)
+      let search = (_this.txtsearch) ? _this.txtsearch : '*'
+      axios.get(_this.urlArray + _this.selected_filter.shortCode + '/' + search + '/' + _this.loadcount + '/' + _this.totalcount,
+        {
+          headers: {
+            author: _this.authorName
+          }
+        })
         .then((res) => {
-          _this.draftData.push(...res.data)
+          _this.articleData.push(...res.data)
           _this.totalcount += res.data.length
         })
         .catch(e => {
@@ -42,7 +50,6 @@ export default {
     userListchangedValue: function (value) {
       let _this = this
       axios.get(process.env.LiveAPI + 'userSearch/50?search=' + value).then((res) => {
-        alert('in api call')
         _this.userList = res.data
       }).catch(e => {
         console.log(e)
@@ -51,26 +58,84 @@ export default {
     changestatus: function () {
       let _this = this
       axios.get(process.env.LiveAPI + 'userSearch/50?search=' + value).then((res) => {
-        alert('in api call')
         _this.userList = res.data
       }).catch(e => {
         console.log(e)
       })
+    },
+    onchange: function () {
+      let _this = this
+      _this.loadcount = 3
+      _this.totalcount = 0
+      let search = (_this.txtsearch) ? _this.txtsearch : '*'
+      axios.get(_this.urlArray + _this.selected_filter.shortCode + '/' + search + '/' + _this.loadcount + '/' + _this.totalcount,
+        {
+          headers: {
+            author: _this.authorName
+          }
+        })
+        .then((res) => {
+          _this.articleData = res.data
+          _this.totalcount += res.data.length
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    onauthorchange: function () {
+      let _this = this
+      _this.loadcount = 3
+      _this.totalcount = 0
+      axios.get(_this.urlArray + _this.selected_filter.shortCode + '/*/' + _this.loadcount + '/' + _this.totalcount,
+        {
+          headers: {
+            author: _this.authorName
+          }
+        })
+        .then((res) => {
+          _this.articleData = res.data
+          _this.totalcount += res.data.length
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    searchBtn: function () {
+      if (this.txtsearch !== '') {
+        let _this = this
+        _this.loadcount = 3
+        _this.totalcount = 0
+        axios.get(_this.urlArray + _this.selected_filter.shortCode + '/' + _this.txtsearch + '/' + _this.loadcount + '/' + _this.totalcount,
+          {
+            headers: {
+              author: _this.authorName
+            }
+          })
+          .then((res) => {
+            _this.articleData = res.data
+            _this.totalcount += res.data.length
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      }
     }
   },
-  mounted() {
+  mounted () {
     let _this = this
     if (!Vue.localStorage.get('user')) {
       _this.$router.push('/')
     }
-    _this.displayname = JSON.parse(Vue.localStorage.get('user')).display_name
-    _this.username = JSON.parse(Vue.localStorage.get('user')).username
-    _this.image = JSON.parse(Vue.localStorage.get('user')).profileImagePreference
     axios.all([
-      axios.get(_this.urlArray + _this.loadcount + '/' + _this.totalcount),
+      axios.get(_this.urlArray + _this.selected_filter.shortCode + '/*/' + _this.loadcount + '/' + _this.totalcount,
+        {
+          headers: {
+            author: _this.authorName
+          }
+        }),
       axios.get(process.env.LiveAPI + 'userSearch/50?search=')
     ]).then(axios.spread(function (res1, res2) {
-      _this.draftData = res1.data
+      _this.articleData = res1.data
       _this.totalcount = res1.data.length
       _this.userList = res2.data
     })).catch(e => {

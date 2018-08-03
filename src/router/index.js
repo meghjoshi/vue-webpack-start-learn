@@ -15,6 +15,7 @@ import logout from '../components/logout/logout.vue'
 import PageNotFound from '../components/404/404.vue'
 import register from '../components/register/register.vue'
 import authorSubmissions from '../components/authorSubmissions/authorSubmissions.vue'
+import pendingpost from '../components/pending-post/pending-post.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
@@ -86,6 +87,11 @@ export default new Router({
       path: '/authorSubmissions',
       name: 'authorSubmissions',
       component: authorSubmissions
+    },
+    {
+      path: '/pending-post',
+      name: 'pending-post',
+      component: pendingpost
     },
     {
       path: '/:slug',
