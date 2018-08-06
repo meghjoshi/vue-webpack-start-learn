@@ -3,9 +3,7 @@ import Vue from 'vue'
 import headermenu from '../headermenu/headermenu.vue'
 import axios from 'axios'
 import VueLocalStorage from 'vue-localstorage'
-
 Vue.use(VueLocalStorage)
-
 export default {
   data: () => ({
     baseImageUrl: process.env.cloudinaryImageUrl,
@@ -22,10 +20,10 @@ export default {
     totalCountScheduled: 0,
     username: JSON.parse(Vue.localStorage.get('user')).username,
     urlArray: [
-      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft,
-      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited,
-      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish,
-      process.env.LocalAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled
+      process.env.LiveAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft,
+      process.env.LiveAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited,
+      process.env.LiveAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish,
+      process.env.LiveAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled
     ]
   }),
   components: {
@@ -38,10 +36,10 @@ export default {
       _this.username = JSON.parse(Vue.localStorage.get('user')).username
       _this.image = this.baseImageUrl + JSON.parse(Vue.localStorage.get('user')).profileImagePreference
       axios.all([
-        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft).catch(null),
-        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited).catch(null),
-        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish).catch(null),
-        axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled).catch(null)
+        axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft).catch(null),
+        axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited).catch(null),
+        axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish).catch(null),
+        axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled).catch(null)
       ]).then(axios.spread(function (res1, res2, res3, res4) {
         _this.draftData = res1.data.articles
         _this.totalCountDraft += parseInt(res1.data.articles.length)
@@ -62,32 +60,31 @@ export default {
       let _this = this
       switch (postname) {
         case 'draft_post':
-          axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft)
+          axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/draft/' + this.loadcount + '/' + this.totalCountDraft)
             .then((res) => {
               _this.draftData.push(...res.data.articles)
               _this.totalCountDraft += res.data.articles.length
             })
           break
         case 'submit_review_post':
-          // axios.get(process.env.LocalAPI + 'articles/' + _this.loadcount + '/' + (_this.totalCountSubmited + total))
-          axios.get(process.env.LocalAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited)
+          axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited)
             .then((res) => {
               _this.submittedData.push(...res.data.articles)
-              _this.totalcount2 += res.data.articles.length
+              _this.totalCountSubmited += res.data.articles.length
             })
           break
         case 'publish_post':
-          axios.get(process.env.LocalAPI + 'articles/' + _this.loadcount + '/' + (_this.totalCountPublish + total))
+          axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish)
             .then((res) => {
               _this.publishedData.push(...res.data.articles)
-              _this.totalcount3 += res.data.articles.length
+              _this.totalCountPublish += res.data.articles.length
             })
           break
         case 'schedule_post':
-          axios.get(process.env.LocalAPI + 'articles/' + _this.loadcount + '/' + (_this.totalCountScheduled + total))
+          axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled)
             .then((res) => {
               _this.scheduledData.push(...res.data.articles)
-              _this.totalcount4 += res.data.articles.length
+              _this.totalCountScheduled += res.data.articles.length
             })
           break
         default:

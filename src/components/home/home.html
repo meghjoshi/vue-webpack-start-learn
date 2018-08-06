@@ -27,11 +27,11 @@
                     <router-link class="font-weight-bold subheading black--text textdecoration"
                                  v-if="topSingleArticle._author.username"
                                  :to="'/author/'+topSingleArticle._author.username"
-                                 >{{topSingleArticle._author.username}}
+                    >{{topSingleArticle._author.username}}
                     </router-link>
                     <p class="font-weight-bold subheading black--text textdecoration"
                        v-if="!topSingleArticle._author.username"
-                       >{{topSingleArticle._author.display_name}}></p>
+                    >{{topSingleArticle._author.display_name}}></p>
                   </v-chip>
                   <!--</v-flex>-->
                 </v-flex>
@@ -49,8 +49,9 @@
                     <v-container fill-height fluid>
                       <v-layout fill-height>
                         <v-flex xs12 align-end flexbox>
-                          <router-link class="font-weight-bold headline white--text textdecoration" :to="'/'+topThreeArticle.slug"
-                                       >{{topThreeArticle.title}}
+                          <router-link class="font-weight-bold headline white--text textdecoration"
+                                       :to="'/'+topThreeArticle.slug"
+                          >{{topThreeArticle.title}}
                           </router-link>
                           <v-flex xs12 class="text-sm-left">
                             <v-chip>
@@ -60,7 +61,7 @@
                               <router-link class="font-weight-bold subheading black--text textdecoration"
                                            :to="'/author/'+topThreeArticle._author.username"
                                            v-if="topThreeArticle._author.username"
-                                           >{{topThreeArticle._author.username}}
+                              >{{topThreeArticle._author.username}}
                               </router-link>
                               <p v-if="!topThreeArticle._author.username"
                                  class="font-weight-bold subheading black--text textdecoration"
@@ -80,7 +81,6 @@
       </v-container>
     </v-content>
     <!--starting block ends-->
-
     <hr class="font-weight-bold">
     <!--featured Video start-->
     <v-content>
@@ -98,8 +98,9 @@
 
               <v-card-title primary-title>
                 <div>
-                  <router-link class="font-weight-bold subheading black--text textdecoration" :to="'/'+videoArticle.slug"
-                               >{{videoArticle.title}}
+                  <router-link class="font-weight-bold subheading black--text textdecoration"
+                               :to="'/'+videoArticle.slug"
+                  >{{videoArticle.title}}
                   </router-link>
                   <br>
                   <div>
@@ -116,7 +117,6 @@
       </v-container>
     </v-content>
     <!--featured Video end-->
-
     <!--news and features start-->
     <!--<v-content>-->
     <v-container fluid>
@@ -135,59 +135,31 @@
               <v-flex xs12 sm4 pl-3 pr-3 pb-3>
                 <v-card>
                   <v-card-media :src="cloudinaryImageUrl+newsFeaturesArticles.wp_featuredImage" height="200px"
-                                ></v-card-media>
+                  ></v-card-media>
                 </v-card>
               </v-flex>
               <v-flex xs12 sm8 pl-3 pr-3>
                 <router-link class="font-weight-black title text-sm-center black--text textdecoration"
                              :to="'/'+newsFeaturesArticles.slug"
-                             >{{newsFeaturesArticles.title}}
+                >{{newsFeaturesArticles.title}}
                 </router-link>
                 <p class="body-2 text-sm-left font-weight-thin">{{newsFeaturesArticles.subTitle}}</p>
                 <router-link class="font-weight-black title black--text textdecoration"
                              :to="'/author/'+newsFeaturesArticles._author.username"
-                             >{{newsFeaturesArticles._author.username}}
+                >{{newsFeaturesArticles._author.username}}
                 </router-link>
               </v-flex>
             </v-layout>
             <v-btn block text-xs-center v-on:click="articleLoadMore(10)">Load More Stories</v-btn>
           </v-flex>
           <v-flex xs3 order-md3 order-xs3 color="red darken-4" text-xs-center>
-            <v-card dark tile flat color="error">
-              <v-form ref="form" v-model="valid" lazy-validation>
-                <v-card-text><p class="text-center subheading">Get the Blavity Daily newsletter with the best community
-                  finds and news.</p>
-                  <hr>
-                  <p class="text-center font-weight-bold title">Delivered To You</p>
-                  <v-text-field
-                    required
-                    label="Name"
-                    v-model="name"
-                    value="name"
-                  ></v-text-field>
-                  <v-text-field
-                    required
-                    :rules="emailRules"
-                    label="Email"
-                    v-model="email"
-                    value="email"
-                  ></v-text-field>
-                </v-card-text>
-                <v-btn outline class="text-center" :disabled="!valid" @click="newsletter()">Sign Me Up</v-btn>
-              </v-form>
-            </v-card>
-            <br><br><br>
-            <v-card dark tile flat>
-              <v-card-text>
-                <p class="text-center subheading"> TRENDING RIGHT NOW</p>
-              </v-card-text>
-            </v-card>
+            <dailynewsletter/>
+            <trendingpost/>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
     <!--news and features end-->
-
     <!--community Start-->
     <v-content fluid>
       <!--<v-container fluid grid-list-md text-xs-center>-->
@@ -207,8 +179,9 @@
                     <v-container fill-height fluid>
                       <v-layout fill-height>
                         <v-flex xs12 align-end flexbox>
-                          <router-link class="font-weight-medium headline white--text textdecoration" :to="'/'+communityArticles.slug"
-                                       >{{communityArticles.title}}
+                          <router-link class="font-weight-medium headline white--text textdecoration"
+                                       :to="'/'+communityArticles.slug"
+                          >{{communityArticles.title}}
                           </router-link>
                           <v-flex xs12 class="text-sm-left">
                             <v-chip>
@@ -217,7 +190,7 @@
                               </v-avatar>
                               <router-link class="font-weight-black title black--text textdecoration"
                                            :to="'/author/'+communityArticles._author.username"
-                                           >{{communityArticles._author.username}}
+                              >{{communityArticles._author.username}}
                               </router-link>
                             </v-chip>
                           </v-flex>
@@ -235,6 +208,5 @@
       <!--</v-container>-->
     </v-content>
     <!--community Ends-->
-
   </v-app>
 </div>

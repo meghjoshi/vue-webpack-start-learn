@@ -1,0 +1,22 @@
+.underline {
+  text-decoration: underline;
+}
+
+.text-aling-left {
+  text-align: left;
+}
+
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+.outline-solid {
+  outline-style: solid;
+}
+
+.border-bottom {
+  border-bottom: 1px;
+  outline-style: solid;
+  outline-width: thin;
+}
+

@@ -1,0 +1,24 @@
+<div>
+  <v-card dark tile flat color="error">
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <v-card-text><p class="text-center subheading">Get the Blavity Daily newsletter with the best community finds and news.</p>
+        <hr>
+        <p class="text-center font-weight-bold title">Delivered To You</p>
+        <v-text-field
+          required
+          label="Name"
+          v-model="name"
+          value="name"
+        ></v-text-field>
+        <v-text-field
+          required
+          :rules="emailRules"
+          label="Email"
+          v-model="email"
+          value="email"
+        ></v-text-field>
+      </v-card-text>
+      <v-btn outline class="text-center" :disabled="!valid" @click="newsletter()">Sign Me Up</v-btn>
+    </v-form>
+  </v-card>
+</div>

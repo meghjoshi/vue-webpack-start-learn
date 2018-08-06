@@ -1,0 +1,21 @@
+<div>
+  <v-card tile flat class="white mt-5 outline-solid">
+    <v-card-text class="grey outline-solid">
+      <h2 class="text-center underline text-decoration-none white--text ma-1 pa-1 pb-1">
+        <img src="https://blavity.com/images/fire.png">
+        TRENDING RIGHT NOW
+      </h2>
+    </v-card-text>
+    <v-layout v-for="(singletrending_articles, i) in trending_articles.slice(0,5)" :key="i">
+      <v-flex class="text-aling-left font-weight-bold pr-3 pl-3 pt-3 border-bottom">
+        <router-link :to="'/'+singletrending_articles.slug"
+                     class="black--text text-decoration-none ">{{singletrending_articles.title}}
+        </router-link>
+        <router-link :to="'/author/'+singletrending_articles._author.username"
+                     class="text-decoration-none">
+          <p class="bold grey--text ">{{singletrending_articles._author.display_name}}</p>
+        </router-link>
+      </v-flex>
+    </v-layout>
+  </v-card>
+</div>
