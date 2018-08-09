@@ -24,7 +24,15 @@ export default {
       process.env.LiveAPI + 'articles/authorposts/' + this.username + '/submited/' + this.loadcount + '/' + this.totalCountSubmited,
       process.env.LiveAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish,
       process.env.LiveAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled
-    ]
+    ],
+    nodraftpost: false,
+    nosubmitpost: false,
+    nopublishpost: false,
+    noschedulepost: false,
+    loadmoredraftpost: true,
+    loadmoresubmitpost: true,
+    loadmorepublishpost: true,
+    loadmoreschedulepost: true,
   }),
   components: {
     headermenu
@@ -41,15 +49,34 @@ export default {
         axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/publish/' + this.loadcount + '/' + this.totalCountPublish).catch(null),
         axios.get(process.env.LiveAPI + 'articles/authorposts/' + this.username + '/scheduled/' + this.loadcount + '/' + this.totalCountScheduled).catch(null)
       ]).then(axios.spread(function (res1, res2, res3, res4) {
-        _this.draftData = res1.data.articles
-        _this.totalCountDraft += parseInt(res1.data.articles.length)
-        _this.submittedData = res2.data.articles
-        _this.totalCountSubmited += parseInt(res2.data.articles.length)
-        _this.publishedData = res3.data.articles
-        _this.totalCountPublish += parseInt(res3.data.articles.length)
-        _this.scheduledData = res4.data.articles
-        _this.totalCountScheduled += parseInt(res4.data.articles.length)
-
+        if (res1.data.articles.length) {
+          _this.draftData = res1.data.articles
+          _this.totalCountDraft += parseInt(res1.data.articles.length)
+        } else {
+          _this.nodraftpost = true
+          _this.loadmoredraftpost = false
+        }
+        if (res2.data.articles.length) {
+          _this.submittedData = res2.data.articles
+          _this.totalCountSubmited += parseInt(res2.data.articles.length)
+        } else {
+          _this.nosubmitpost = true
+          _this.loadmoresubmitpost = false
+        }
+        if (res3.data.articles.length) {
+          _this.publishedData = res3.data.articles
+          _this.totalCountPublish += parseInt(res3.data.articles.length)
+        } else {
+          _this.nopublishpost = true
+          _this.loadmorepublishpost = false
+        }
+        if (res4.data.articles.length) {
+          _this.scheduledData = res4.data.articles
+          _this.totalCountScheduled += parseInt(res4.data.articles.length)
+        } else {
+          _this.noschedulepost = true
+          _this.loadmoreschedulepost = false
+        }
       }))
     } else {
       this.$router.push('/')
@@ -64,6 +91,9 @@ export default {
             .then((res) => {
               _this.draftData.push(...res.data.articles)
               _this.totalCountDraft += res.data.articles.length
+              if (res.data.articles.length < _this.loadcount) {
+                _this.loadmoredraftpost = false
+              }
             })
           break
         case 'submit_review_post':
@@ -71,6 +101,9 @@ export default {
             .then((res) => {
               _this.submittedData.push(...res.data.articles)
               _this.totalCountSubmited += res.data.articles.length
+              if (res.data.articles.length < _this.loadcount) {
+                _this.loadmoresubmitpost = false
+              }
             })
           break
         case 'publish_post':
@@ -78,6 +111,9 @@ export default {
             .then((res) => {
               _this.publishedData.push(...res.data.articles)
               _this.totalCountPublish += res.data.articles.length
+              if (res.data.articles.length < _this.loadcount) {
+                _this.loadmorepublishpost = false
+              }
             })
           break
         case 'schedule_post':
@@ -85,6 +121,9 @@ export default {
             .then((res) => {
               _this.scheduledData.push(...res.data.articles)
               _this.totalCountScheduled += res.data.articles.length
+              if (res.data.articles.length < _this.loadcount) {
+                _this.loadmoreschedulepost = false
+              }
             })
           break
         default:

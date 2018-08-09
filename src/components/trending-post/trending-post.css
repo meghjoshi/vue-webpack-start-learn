@@ -1,9 +1,9 @@
 .underline {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 .text-aling-left {
-  text-align: left;
+  text-align: left !important;
 }
 
 .text-decoration-none {
@@ -11,12 +11,12 @@
 }
 
 .outline-solid {
-  outline-style: solid;
+  outline-style: solid !important;
 }
 
 .border-bottom {
-  border-bottom: 1px;
-  outline-style: solid;
-  outline-width: thin;
+  border-bottom: 1px !important;
+  outline-style: solid !important;
+  outline-width: thin !important;
 }
 

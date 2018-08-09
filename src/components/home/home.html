@@ -6,23 +6,27 @@
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-container raised hover fill-height class="backgroundcolor">
-              <v-layout align-center v-for="topSingleArticle in articleData.slice(0,1)" :key="topSingleArticle._id">
-                <v-flex sm6>
+            <v-container raised hover fill-height ma-0 pa-0 class="backgroundcolor">
+              <v-layout align-center first-article
+                        v-for="topSingleArticle in articleData.slice(0,1)" :key="topSingleArticle._id">
+                <v-flex sm6 pa-0 pt-1>
                   <img class="maxwidth" :src="cloudinaryImageUrl+topSingleArticle.wp_featuredImage">
                 </v-flex>
                 <v-flex xs12 sm6>
-                  <router-link :to="'/'+topSingleArticle.slug"
-                               class="title font-weight-medium black--text textdecoration">{{topSingleArticle.title}}
-                  </router-link>
-                  <!--<v-flex xs12 sm6 text-xs-center>-->
-                  <br>
-                  <v-btn outline :to="'/'+topSingleArticle.slug">Read This</v-btn>
-                  <br>
-                  <br>
-                  <v-chip>
+                  <v-flex pa-5>
+                    <router-link :to="'/'+topSingleArticle.slug"
+                                 class="black--text textdecoration topSingleArticle-title">{{topSingleArticle.title}}
+                    </router-link>
+                  </v-flex>
+                  <v-flex read-me black--text>
+                    <router-link :to="'/'+topSingleArticle.slug">Read This</router-link>
+                  </v-flex>
+                  <v-flex mt-4>
                     <v-avatar>
-                      <img :src="topSingleArticle._author.gravatar">
+                      <img v-if="topSingleArticle._author.profileImagePreference == 'gravatar'"
+                           :src="topSingleArticle._author.gravatar" >
+                      <img v-if="topSingleArticle._author.profileImagePreference != 'gravatar'"
+                           :src="cloudinaryImageUrl+topSingleArticle._author.profileImagePreference">
                     </v-avatar>
                     <router-link class="font-weight-bold subheading black--text textdecoration"
                                  v-if="topSingleArticle._author.username"
@@ -32,8 +36,7 @@
                     <p class="font-weight-bold subheading black--text textdecoration"
                        v-if="!topSingleArticle._author.username"
                     >{{topSingleArticle._author.display_name}}></p>
-                  </v-chip>
-                  <!--</v-flex>-->
+                  </v-flex>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -53,10 +56,13 @@
                                        :to="'/'+topThreeArticle.slug"
                           >{{topThreeArticle.title}}
                           </router-link>
-                          <v-flex xs12 class="text-sm-left">
+                          <v-flex>
                             <v-chip>
                               <v-avatar>
-                                <img :src="topThreeArticle._author.gravatar">
+                                <img v-if="topThreeArticle._author.profileImagePreference == 'gravatar'"
+                                     :src="topThreeArticle._author.gravatar">
+                                <img v-if="topThreeArticle._author.profileImagePreference != 'gravatar'"
+                                     :src="cloudinaryImageUrl+topThreeArticle._author.profileImagePreference">
                               </v-avatar>
                               <router-link class="font-weight-bold subheading black--text textdecoration"
                                            :to="'/author/'+topThreeArticle._author.username"
@@ -83,8 +89,8 @@
     <!--starting block ends-->
     <hr class="font-weight-bold">
     <!--featured Video start-->
-    <v-content>
-      <v-container fluid grid-list-md text-xs-center>
+    <v-content style="padding: 0 0 0 0 !important;">
+      <v-container fluid grid-list-md text-xs-center >
         <v-layout row wrap>
           <v-flex xs12>
             <p class="text-sm-left display-1 font-weight-bold">Featured Video</p>
@@ -95,7 +101,6 @@
                 :src="cloudinaryImageUrl+videoArticle.wp_featuredImage"
                 height="300px">
               </v-card-media>
-
               <v-card-title primary-title>
                 <div>
                   <router-link class="font-weight-bold subheading black--text textdecoration"
@@ -119,15 +124,15 @@
     <!--featured Video end-->
     <!--news and features start-->
     <!--<v-content>-->
-    <v-container fluid>
+    <v-container fluid >
       <!--<v-layout>-->
-      <v-flex xs12 text-xs-left>
+      <v-flex xs12 text-xs-left pt-0 pb-0>
         <h2 class="font-weight-bold display-1">News and Features</h2>
       </v-flex>
       <!--</v-layout>-->
     </v-container>
     <!--</v-content>-->
-    <v-content pt-0>
+    <v-content style="padding: 0 0 0 0 !important;">
       <v-container fluid>
         <v-layout row>
           <v-flex xs9 order-md3 order-xs3>
@@ -186,7 +191,10 @@
                           <v-flex xs12 class="text-sm-left">
                             <v-chip>
                               <v-avatar>
-                                <img :src="communityArticles._author.gravatar">
+                                  <img v-if="communityArticles._author.profileImagePreference == 'gravatar'"
+                                       :src="communityArticles._author.gravatar">
+                                  <img v-if="communityArticles._author.profileImagePreference != 'gravatar'"
+                                    :src="cloudinaryImageUrl+communityArticles._author.profileImagePreference">
                               </v-avatar>
                               <router-link class="font-weight-black title black--text textdecoration"
                                            :to="'/author/'+communityArticles._author.username"

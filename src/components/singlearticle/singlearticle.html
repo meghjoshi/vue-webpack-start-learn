@@ -1,56 +1,63 @@
 <div>
   <v-app>
     <headermenu/>
-    <v-content>
-      <v-container grid-list-md>
+    <v-content class="padding0">
+      <v-container fluid ma-5 class="padding0">
         <v-layout row wrap>
-          <v-flex xs12 sm9 class="text-sm-left ">
+          <v-flex xs8>
+            <v-flex class="mb-2 mt-2">
             <span class="bold">
               Posted Under:
             </span>
-            <span v-for="(cat, index) in singlearticle.categories">
+              <span v-for="(cat, index) in singlearticle.categories">
               <v-btn round small outline color="grey" :to="'/categories/'+cat.slug.toLowerCase()">
                 {{cat.name}}
               </v-btn>
             </span>
-          </v-flex>
-          <v-flex xs12 sm9 class="text-sm-left title">
-            <h1>{{singlearticle.title}}</h1>
-          </v-flex>
-          <v-flex xs12 sm9 class="text-sm-left ">
-            <h3>{{singlearticle.subTitle}}</h3>
-          </v-flex>
-          <v-flex xs12 sm9 class="text-sm-left">
-            <v-chip>
-              <v-avatar>
-                <img
-                  :src="cloudinaryImageUrl+singlearticle.wp_featuredImage"
-                  height="30%">
-              </v-avatar>
-              <router-link class="font-weight-bold subheading black--text textnone"
-                           v-if="singlearticle._author.username"
-                           :to="'/author/'+singlearticle._author.username">{{singlearticle._author.username}}
-              </router-link>
-              <p v-if="!singlearticle._author.username"
-                 class="font-weight-bold subheading black--text textnone">{{singlearticle._author.display_name}}></p>
-            </v-chip>
-          </v-flex>
-          <v-flex xs12 sm9 class="text-sm-left">
-            <img
-              :src="cloudinaryImageUrl+singlearticle.wp_featuredImage"
-              height="100%" width="70%">
-          </v-flex>
-          <v-flex xs12 sm9 class="text-sm-left">
-            <p class="headline"><span v-html='singlearticle.body'></span></p>
-          </v-flex>
-          <v-flex xs12 sm9 class="text-sm-left" v-if="singlearticle.tags.length">
-            <hr class="mb-3">
-            <span class="font-weight-black mt-3">Tags</span>
-            <span v-for="(tag, index) in singlearticle.tags">
+            </v-flex>
+            <v-flex class="mb-2 mt-2 article-title">
+              <h1>{{singlearticle.title}}</h1>
+            </v-flex>
+            <v-flex class="mb-2 mt-2 article-sub-title grey--text">
+              <h1>{{singlearticle.subTitle}}</h1>
+            </v-flex>
+            <v-flex class="mb-2 mt-2">
+              <v-chip>
+                <v-avatar>
+                  <img v-if="singlearticle._author.profileImagePreference == 'gravatar'"
+                       :src="singlearticle._author.gravatar" height="30%">
+                  <img v-if="singlearticle._author.profileImagePreference != 'gravatar'"
+                       :src="cloudinaryImageUrl+singlearticle._author.profileImagePreference" height="30%">
+                </v-avatar>
+                <router-link class="font-weight-bold subheading black--text textnone"
+                             v-if="singlearticle._author.username"
+                             :to="'/author/'+singlearticle._author.username">{{singlearticle._author.username}}
+                </router-link>
+                <p v-if="!singlearticle._author.username"
+                   class="font-weight-bold subheading black--text textnone">{{singlearticle._author.display_name}}></p>
+              </v-chip>
+            </v-flex>
+            <v-flex class="mb-2 mt-2">
+              <img
+                :src="cloudinaryImageUrl+singlearticle.wp_featuredImage"
+                height="100%" width="70%">
+            </v-flex>
+            <v-flex class="mb-2 mt-2 article-body">
+              <p class="headline"><span v-html='singlearticle.body'></span></p>
+            </v-flex>
+            <v-flex v-if="singlearticle.tags.length">
+              <hr class="mb-3">
+              <span class="font-weight-black mt-3">Tags</span>
+              <span v-for="(tag, index) in singlearticle.tags">
               <v-btn round small outline color="grey" class="bold" :to="'/tag/'+tag.slug">
                 {{tag.name}}
               </v-btn>
             </span>
+            </v-flex>
+          </v-flex>
+          <v-flex xs3 ma-5>
+            <dailynewsletter/>
+            <trendingpost/>
           </v-flex>
         </v-layout>
       </v-container>

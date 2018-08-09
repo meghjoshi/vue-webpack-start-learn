@@ -1,7 +1,31 @@
 .textnone {
-  text-decoration: none
+  text-decoration: none !important
 }
 
 .bold {
   font-weight: bolder
+}
+
+.padding0 {
+  padding: 0 !important;
+}
+
+.article-body {
+
+}
+
+.article-body img {
+  width: 100%;
+}
+
+.article-title {
+  font-size: 20px;
+  margin: 5px 0 10px;
+  color: #000;
+}
+
+.article-sub-title {
+  font-size: 12px;
+  margin: 5px 0 10px;
+  color: #000;
 }

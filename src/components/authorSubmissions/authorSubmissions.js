@@ -13,7 +13,7 @@ export default {
     image: null,
     displayname: null,
     selecteduser: '',
-    loadcount: 3,
+    loadcount: 10,
     totalcount: 0,
     selected_filter: {shortCode: 'submited', text: 'Post In Review'},
     filter: [

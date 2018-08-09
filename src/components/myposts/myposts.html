@@ -31,13 +31,15 @@
                   <img :src="image" :alt="username">
                 </v-avatar>
                 <router-link class="decoration font-weight-bold subheading black--text" :to="'/author/'+username"
-                             >{{displayname}}
+                >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>
           </v-layout>
-          <br>
-          <v-layout justify-center>
+          <v-layout justify-center v-if="nodraftpost">
+            <h3>No drafts yet</h3>
+          </v-layout>
+          <v-layout justify-center v-if="loadmoredraftpost">
             <v-btn class="textalign" outline @click="loadMore(3,'draft_post')">Load More</v-btn>
           </v-layout>
         </v-container>
@@ -72,13 +74,15 @@
                   <img :src="image" :alt="username">
                 </v-avatar>
                 <router-link class="font-weight-bold subheading black--text decoration" :to="'/author/'+username"
-                             >{{displayname}}
+                >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>
           </v-layout>
-          <br>
-          <v-layout justify-center>
+          <v-layout justify-center v-if="nosubmitpost">
+            <h3>No posts submitted yet</h3>
+          </v-layout>
+          <v-layout justify-center v-if="loadmoresubmitpost">
             <v-btn outline @click="loadMore(3,'submit_review_post')">Load More</v-btn>
           </v-layout>
         </v-container>
@@ -113,13 +117,15 @@
                   <img :src="image" :alt="username">
                 </v-avatar>
                 <router-link class="font-weight-bold subheading black--text decoration" :to="'/author/'+username"
-                             >{{displayname}}
+                >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>
           </v-layout>
-          <br>
-          <v-layout justify-center>
+          <v-layout justify-center v-if="nopublishpost">
+            <h3>No published posts yet</h3>
+          </v-layout>
+          <v-layout justify-center v-if="loadmorepublishpost">
             <v-btn outline @click="loadMore(3,'publish_post')">Load More</v-btn>
           </v-layout>
         </v-container>
@@ -154,13 +160,15 @@
                   <img :src="image" :alt="username">
                 </v-avatar>
                 <router-link class="font-weight-bold subheading black--text decoration" :to="'/author/'+username"
-                             >{{displayname}}
+                >{{displayname}}
                 </router-link>
               </v-container>
             </v-flex>
           </v-layout>
-          <br>
-          <v-layout justify-center>
+          <v-layout justify-center v-if="noschedulepost">
+            <h3>No scheduled posts yet</h3>
+          </v-layout>
+          <v-layout justify-center v-if="loadmoreschedulepost">
             <v-btn outline @click="loadMore(3,'schedule_post')">Load More</v-btn>
           </v-layout>
         </v-container>

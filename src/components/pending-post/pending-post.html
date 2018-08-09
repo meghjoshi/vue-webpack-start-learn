@@ -54,7 +54,10 @@
                 <router-link class="font-weight-bold subheading black--text text-decoration-none"
                              :to="'/author/'+item._author.username">
                   <v-avatar size="48">
-                    <img :src="item._author.profileImagePreference" :alt="item._author.username">
+                    <img v-if="item._author.profileImagePreference == 'gravatar'"
+                         :src="item._author.gravatar">
+                    <img v-if="item._author.profileImagePreference != 'gravatar'"
+                         :src="baseImageUrl+item._author.profileImagePreference">
                   </v-avatar>
                   <span v-if="item._author.display_name">
                     {{item._author.display_name}}
