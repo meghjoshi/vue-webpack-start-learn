@@ -40,7 +40,7 @@ export default {
   mounted () {
     if (Vue.localStorage.get('user')) {
       this.menuItems.shift()
-      this.menuItems.unshift({title: 'Create Post', link: '/create/post'})
+      this.menuItems.unshift({title: 'Create Post', link: '/post'})
       this.isLogin = true
       let username = JSON.parse(Vue.localStorage.get('user')).username
       let image = process.env.cloudinaryImageUrl + JSON.parse(Vue.localStorage.get('user')).profileImagePreference

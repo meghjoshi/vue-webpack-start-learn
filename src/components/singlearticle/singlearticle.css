@@ -15,7 +15,13 @@
 }
 
 .article-body img {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.article-body iframe {
   width: 100%;
+  height: 350px;
 }
 
 .article-title {
@@ -28,4 +34,10 @@
   font-size: 12px;
   margin: 5px 0 10px;
   color: #000;
+}
+
+.main_featuredImage img {
+  max-width: 100%;
+  height: auto;
+  min-width: 100%;
 }

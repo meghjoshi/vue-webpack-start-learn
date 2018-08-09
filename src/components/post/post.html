@@ -1,10 +1,187 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<div>
+  <headermenu/>
+  <v-content>
+    <v-container class="light-grey">
+      <v-layout fluid>
+        <v-flex>
+          <p class="display-1 grey--text">What type of post will this be?</p>
+          <p class="body-2 font-weight-bold">Please only submit original, unpublished content. Content that has been
+            previously published on other sites will not be accepted.</p>
+          <hr class="display-1">
+          <br>
+        </v-flex>
+      </v-layout>
+      <v-layout>
+        <v-flex>
+          <v-tabs fixed-tabs>
+            <v-tab @click="opiniontab()">
+              Opinion
+            </v-tab>
+            <v-tab @click="videotab()">
+              Video
+            </v-tab>
+            <v-tab @click="newstab()">
+              News
+            </v-tab>
+          </v-tabs>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <v-container v-if="video">
+      <v-layout>
+        <v-flex text-sm-left>
+          <p class="text-uppercase" v-if="(title==='Video') ? true : false">{{title}}</p>
+          <v-btn small outline @click="uploadvideofunc()">Upload Video Files</v-btn>
+          <v-btn small outline @click="videourlfunc()">Enter Video Url</v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <v-container v-if="uploadvideoflag">
+      <v-layout>
+        <v-flex text-sm-center>
+          <input type="file" @change="onFileSelected">
+          <video v-if="videoshowflag" width="400" controls>
+            <source :src="videoUrl" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <v-container v-if="videourlflag">
+      <v-layout>
+        <v-flex text-sm-center>
+          <v-text-field
+            placeholder="Enter the video url"
+          v-model="videourlvalue"></v-text-field>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <v-container fluid>
+      <v-layout>
+        <v-flex text-sm-center>
+          <p class="headline">Don't leave anything blank! All fields are required!</p>
+        </v-flex>
+      </v-layout>
+    </v-container>
+    <v-container fluid>
+      <v-layout>
+        <v-flex xs8 pl-4 pr-4 color="blue">
+          <v-flex>
+            <p class="text-uppercase" v-if="(title==='Video') ? false : true">{{title}}</p>
+            <v-avatar>
+              <img :src="baseImageUrl+imageProfile" height="100">
+            </v-avatar>
+            <span class="title grey--text">{{username}}</span>
+          </v-flex>
+          <v-flex mt-3>
+            <hr>
+            <v-text-field
+              v-model="txttitle"
+              @keyup="keyupfunc()"
+              label="Title">
+            </v-text-field>
+          </v-flex>
+          <v-flex mt-3>
+            <v-text-field
+              v-model="txtsubtitle"
+              label="Sub Title">
+            </v-text-field>
+          </v-flex>
+          <v-flex>
+            <v-text-field
+              :disabled="urlflag"
+              v-model="txturl"
+              label="URL">
+            </v-text-field>
+            <v-btn outline @click="toggle()">{{urlbuttonflag}}</v-btn>
+          </v-flex>
+          <v-flex>
+            <ckeditor v-model="bodycontent" :config="config" @blur="onBlur($event)" @focus="onFocus($event)"/>
+          </v-flex>
+          <v-flex>
+            <v-textarea
+              v-model="description"
+              label="Description (No need for HTML formatting here.) Try to keep it under 160 characters."
+              placeholder="Let people know what this article is about">
+            </v-textarea>
+          </v-flex>
+        </v-flex>
+        <v-flex xs4>
+          <v-flex xs12>
+            <v-btn block outline color="lighten-4" class="green--text">Preview post</v-btn>
+          </v-flex>
+          <v-flex xs12>
+            <v-btn block outline class="green--text" color="lighten-4">Schedule on</v-btn>
+          </v-flex>
+          <v-flex>
+            <v-btn block outline color="lighten-4" class="green--text" @click="saveArticle()">Save</v-btn>
+            <v-btn block outline color="lighten-4" class="green--text">Submit</v-btn>
+            <p class="text-sm-center font-weight-bold title">Manage Post</p>
+          </v-flex>
+          <v-flex>
+            <span>Category (pick up to 2)</span>
+            <v-combobox
+              small
+              v-model="categoryvalue"
+              :items="categoryList"
+              hide-details
+              multiple
+              id="categoryId"
+              hint="Up to 2 categories allows"
+              placeholder='Select a Category'
+              @keyup="categorychangedValue"
+            ></v-combobox>
+          </v-flex>
+          <v-flex mt-4>
+            <span>Tags (help people find this post)</span>
+            <v-combobox
+              small
+              v-model="tagvalue"
+              :items="tagList"
+              hide-details
+              id="tagId"
+              multiple
+              placeholder='tag1, tag2, tag3, tag4, etc'
+              @keyup="tagchangedValue"
+            ></v-combobox>
+          </v-flex>
+          <v-flex>
+            <br>
+            <p>Hidden Tags (to secretly group articles)</p>
+            <v-btn raised class="secondary" @click="onPickFile()">Upload file...</v-btn>
+            <input
+              id="file_uploader"
+              type="file"
+              class="hide"
+              ref="fileInput"
+              accept="image/*"
+              @change="previewFile"><br>
+            <img :src="imageurl" id="imgpreview" height="200">
+            <br>
+            <v-flex v-if="btnflag">
+              <v-btn :disabled="startbtnflag">Start</v-btn>
+              <v-btn @click="cancel()">Cancel</v-btn>
+              <v-btn @click="cancel()">Delete</v-btn>
+            </v-flex>
+            <hr>
+            <v-flex>
+              <br>
+              <p>Description (What is this a picture of?) :</p>
+              <v-text-field
+                v-model="picturedescription"
+                placeholder="Feature image Alter Text">
+              </v-text-field>
+              <br>
 
-</body>
-</html>
+              <p>Caption / Credits :</p>
+              <v-text-field
+                v-model="captioncredits"
+                placeholder="Feature Image Caption">
+              </v-text-field>
+            </v-flex>
+          </v-flex>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
+</div>

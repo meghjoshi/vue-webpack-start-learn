@@ -65,7 +65,6 @@ export default {
     },
     onchange: function () {
       let _this = this
-      _this.loadcount = 3
       _this.totalcount = 0
       let search = (_this.txtsearch) ? _this.txtsearch : '*'
       axios.get(_this.urlArray + _this.selected_filter.shortCode + '/' + search + '/' + _this.loadcount + '/' + _this.totalcount,
@@ -83,8 +82,8 @@ export default {
         })
     },
     onauthorchange: function () {
+
       let _this = this
-      _this.loadcount = 3
       _this.totalcount = 0
       axios.get(_this.urlArray + _this.selected_filter.shortCode + '/*/' + _this.loadcount + '/' + _this.totalcount,
         {
@@ -103,7 +102,6 @@ export default {
     searchBtn: function () {
       if (this.txtsearch !== '') {
         let _this = this
-        _this.loadcount = 3
         _this.totalcount = 0
         axios.get(_this.urlArray + _this.selected_filter.shortCode + '/' + _this.txtsearch + '/' + _this.loadcount + '/' + _this.totalcount,
           {

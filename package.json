@@ -14,6 +14,7 @@
     "axios": "^0.18.0",
     "es6-promise": "^4.2.4",
     "vue": "^2.5.2",
+    "vue-ckeditor2": "^2.0.6",
     "vue-localstorage": "^0.6.2",
     "vue-lodash": "^2.0.0",
     "vue-router": "^3.0.1",

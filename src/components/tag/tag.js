@@ -29,12 +29,15 @@ export default {
         .get(process.env.LiveAPI + 'articles/tags/' + this.$route.params.tag + '/' + this.loadCount + '/' + (this.totalcount))
         .then(response => {
           if (response.data.length) {
-            if (!this.info.length) {
+            if (!this.totalcount) {
               this.info = (response.data)
             } else {
               this.info.push(...response.data)
             }
             this.totalcount = this.totalcount + response.data.length
+            if (response.data.length < this.loadCount) {
+              this.loadMoreButton = 0
+            }
           } else {
             this.loadMoreButton = 0
           }
